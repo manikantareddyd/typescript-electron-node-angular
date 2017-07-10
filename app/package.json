@@ -4,14 +4,16 @@
   "description": "Hallelujah",
   "main": "index.js",
   "scripts": {
-    "start": "node ../dist//index.js"
+    "start": "node dist//index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/body-parser": "0.0.33",
     "@types/debug": "0.0.29",
     "@types/express": "^4.0.33",
+    "@types/morgan": "^1.7.32",
     "@types/node": "^6.0.46",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.1",
@@ -22,7 +24,9 @@
     "url": "git://github.com/manikantareddyd/node-angular-typescript-template.git"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "debug": "^2.2.0",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
   }
 }
