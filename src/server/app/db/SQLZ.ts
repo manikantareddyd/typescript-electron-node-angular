@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
-var SQLZ = function SQLZ {
+var SQLZ = function() {
     let sqlz;
     const config = require(__dirname + '/config')['development'];
-    console.log(config, "config");
+    console.log("Database config", config);
     sqlz = new Sequelize({
         name: config.database,
         username: config.username,
