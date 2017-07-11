@@ -2,8 +2,8 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import SQLZ from './app/db/SQLZ';
-import Heroes from './app/db/models/hero';
+import SQLZ from './db/index';
+import Heroes from './db/models/hero';
 // Creates and configures an ExpressJS web server.
 class App {
 
