@@ -2,9 +2,11 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import HeroRouter from './app/routes/HeroRouter';
+
 
 // Creates and configures an ExpressJS web server.
-class App {
+class AppServer {
 
   // ref to Express instance
   public express: express.Application;
@@ -36,8 +38,9 @@ class App {
       });
     });
     this.express.use('/', router);
+    this.express.use('/api/v1/heroes', HeroRouter);
   }
 
 }
 
-export default new App().express;
+export default new AppServer().express;
