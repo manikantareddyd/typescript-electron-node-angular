@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import {Sequelize} from 'sequelize-typescript';
+import SQLZ from './app/db/SQLZ';
 import Heroes from './app/db/models/hero';
 // Creates and configures an ExpressJS web server.
 class App {
@@ -13,32 +13,13 @@ class App {
   //Run configuration methods on the Express instance.
   constructor() {
     this.express = express();
+    // setup sequelizer
+    SQLZ();
     this.middleware();
     this.routes();
-    let sequelize;
-    const config = require(__dirname+'/app/db/config')['development'];
-    console.log(config, "config");
-    sequelize = new Sequelize({
-      name:config.database, 
-      username:config.username, 
-      password:config.password, 
-      dialect:config.dialect,
-      host:config.host,
-      port:config.port,
-      modelPaths:[__dirname+'/app/db/models']
+    Heroes.count().then(c=>{
+      console.log("Heroes Count:\t", c);
     });
-    // sequelize.addModels([__dirname+'/app/db/models']);
-    sequelize
-      .authenticate()
-      .then(() => {
-        console.log('Connection has been established successfully.');
-        Heroes.findAll().then(users => {
-          console.log(users)
-        })
-      })
-      .catch(err => {
-        console.error('Unable to connect to the database:', err);
-      });
   }
 
   // Configure Express middleware.
