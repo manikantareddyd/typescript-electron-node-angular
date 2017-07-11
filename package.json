@@ -11,6 +11,7 @@
   "author": "Manikanta Reddy D.",
   "license": "ISC",
   "devDependencies": {
+    "@types/async": "^2.0.40",
     "@types/body-parser": "0.0.33",
     "@types/chai": "^3.4.34",
     "@types/chai-http": "0.0.29",
@@ -19,11 +20,14 @@
     "@types/mocha": "^2.2.32",
     "@types/morgan": "^1.7.32",
     "@types/node": "^6.0.46",
+    "@types/sequelize": "^4.0.65",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.0",
+    "gulp-yml": "^0.1.1",
     "mocha": "^3.1.2",
+    "sequelize-typescript": "^0.3.5",
     "ts-node": "^1.6.1",
     "typescript": "^2.4.1"
   },
@@ -32,9 +36,14 @@
     "url": "git://github.com/manikantareddyd/node-angular-typescript-template.git"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.15.2",
     "debug": "^2.2.0",
     "express": "^4.14.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "pg": "^6.4.0",
+    "pg-hstore": "^2.3.2",
+    "reflect-metadata": "^0.1.10",
+    "sequelize": "^4.3.0"
   }
 }

@@ -2,11 +2,10 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import HeroRouter from './app/routes/HeroRouter';
-
-
+import {Sequelize} from 'sequelize-typescript';
+import Heroes from './app/db/models/hero';
 // Creates and configures an ExpressJS web server.
-class AppServer {
+class App {
 
   // ref to Express instance
   public express: express.Application;
@@ -16,6 +15,30 @@ class AppServer {
     this.express = express();
     this.middleware();
     this.routes();
+    let sequelize;
+    const config = require(__dirname+'/app/db/config')['development'];
+    console.log(config, "config");
+    sequelize = new Sequelize({
+      name:config.database, 
+      username:config.username, 
+      password:config.password, 
+      dialect:config.dialect,
+      host:config.host,
+      port:config.port,
+      modelPaths:[__dirname+'/app/db/models']
+    });
+    // sequelize.addModels([__dirname+'/app/db/models']);
+    sequelize
+      .authenticate()
+      .then(() => {
+        console.log('Connection has been established successfully.');
+        Heroes.findAll().then(users => {
+          console.log(users)
+        })
+      })
+      .catch(err => {
+        console.error('Unable to connect to the database:', err);
+      });
   }
 
   // Configure Express middleware.
@@ -38,9 +61,8 @@ class AppServer {
       });
     });
     this.express.use('/', router);
-    this.express.use('/api/v1/heroes', HeroRouter);
   }
 
 }
 
-export default new AppServer().express;
+export default new App().express;

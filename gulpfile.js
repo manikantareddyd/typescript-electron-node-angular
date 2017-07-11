@@ -1,23 +1,28 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
-const JSON_FILES = ['src/*.json', 'src/**/*.json'];
+const yml = require('gulp-yml');
+const JSON_FILES = ['server/*.json', 'server/**/*.json'];
 
 // pull in the project TypeScript config
 const tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('scripts', () => {
-  const tsResult = tsProject.src()
-  .pipe(tsProject());
-  return tsResult.js.pipe(gulp.dest('dist'));
+  return tsProject.src()
+    .pipe(tsProject())
+    .js
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['scripts'], () => {
-  gulp.watch('src/**/*.ts', ['scripts']);
-});
-
-gulp.task('assets', function() {
+gulp.task('data', () => {
   return gulp.src(JSON_FILES)
+  .pipe(yml())
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['watch', 'assets']);
+gulp.task('watch', ['scripts', 'data'], () => {
+  gulp.watch('server/**/*.{ts, json, html, md}', ['scripts', 'data']);
+});
+
+var tasks = ['watch'];
+
+gulp.task('default', tasks);
