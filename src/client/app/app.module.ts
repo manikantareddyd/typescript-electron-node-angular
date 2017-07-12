@@ -1,6 +1,8 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
+import { HttpModule, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { AppComponent }         from './components/app/app.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
@@ -14,7 +16,8 @@ import { AppRoutingModule }     from './modules/app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
