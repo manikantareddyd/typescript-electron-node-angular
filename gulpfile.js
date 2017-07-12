@@ -1,15 +1,21 @@
+'use strict';
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const yml = require('gulp-yml');
-const JSON_FILES = ['src/*.json', 'src/**/*.json'];
+let uglify = require('gulp-uglify');
+let sourcemaps = require('gulp-sourcemaps');
+const JSON_FILES = ['src/*.json', 'src/**/*.json', '!tsconfig.json'];
 
 // pull in the project TypeScript config
-const tsProject = ts.createProject('./tsconfig.json');
+const serverTsProject = ts.createProject('./src/server/tsconfig.json');
 
-gulp.task('scripts', () => {
-  var tsResult = gulp.src("src/**/*.ts")
-    .pipe(tsProject());
-  return tsResult.js.pipe(gulp.dest('dist'));
+gulp.task('serverscripts', () => {
+  return serverTsProject.src()
+    .pipe(sourcemaps.init())
+    .pipe(serverTsProject())
+    .js
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/server'));
 });
 
 gulp.task('data', () => {
@@ -18,7 +24,7 @@ gulp.task('data', () => {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('watch', ['scripts', 'data'], () => {
+gulp.task('watch', ['serverscripts', 'data'], () => {
   // gulp.watch('src/**/*.{ts, json, html, md}', ['scripts', 'data']);
 });
 
