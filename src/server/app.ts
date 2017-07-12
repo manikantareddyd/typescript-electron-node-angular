@@ -4,6 +4,9 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import SQLZ from './db/index';
 import Heroes from './db/models/hero';
+
+
+import HeroRouter from './api/v1/heroes/hero.router';
 // Creates and configures an ExpressJS web server.
 class App {
 
@@ -42,6 +45,7 @@ class App {
       });
     });
     this.express.use('/', router);
+    this.express.use('/api/v1/heroes', HeroRouter);
   }
 
 }
