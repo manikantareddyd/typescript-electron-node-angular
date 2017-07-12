@@ -30,15 +30,18 @@ class App {
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use('/', express.static(path.join(__dirname,'../client')));
+    this.express.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
   }
 
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
     router.get('/', (req, res, next) => {
-      res.json({
-        message: 'Hello World!'
-      });
+      // res.json({
+      //   message: 'Hello World!'
+      // });
+      res.sendFile(__dirname+'/index.html');
     });
     this.express.use('/', router);
     this.express.use('/api/v1/heroes', HeroRouter);
