@@ -7,11 +7,10 @@ export class HeroRouter {
      * Take each handler, and attach to one of the Express.Router's
      * endpoints.
      */
-
-
     constructor() {
         this.router = Router();
         this.router.get('/getAll', HeroController.getAll);
+        this.router.get('/getOne/:id', HeroController.getOne);
     }
 
 }

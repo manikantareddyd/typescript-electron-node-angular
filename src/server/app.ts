@@ -20,7 +20,7 @@ class App {
     SQLZ();
     this.middleware();
     this.routes();
-    Heroes.count().then(c=>{
+    Heroes.count().then(c => {
       console.log("Heroes Count:\t", c);
     });
   }
@@ -34,11 +34,7 @@ class App {
 
   // Configure API endpoints.
   private routes(): void {
-    /* This is just to get up and running, and to make sure what we've got is
-     * working so far. This function will change when we start to add more
-     * API endpoints */
     let router = express.Router();
-    // placeholder route handler
     router.get('/', (req, res, next) => {
       res.json({
         message: 'Hello World!'
