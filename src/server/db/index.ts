@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import * as path from 'path';
 var SQLZ = function () {
     let sqlz;
     const config = require(__dirname + '/config')['development'];
@@ -10,7 +11,7 @@ var SQLZ = function () {
         dialect: config.dialect,
         host: config.host,
         port: config.port,
-        modelPaths: [__dirname + '/models']
+        modelPaths: [path.join(__dirname, '/models')]
     });
     sqlz
         .authenticate()
