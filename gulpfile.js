@@ -18,30 +18,9 @@ gulp.task('move_server_data', () => {
     .pipe(gulp.dest('dist/server'));
 });
 
-gulp.task('move_client_files', () => {
-  return gulp.src(CLIENT_FILES)
-    .pipe(gulp.dest('dist/client'));
-});
-
-
-
-
-
-
-
-
-
-
-
-
-// gulp.task('watch', ['serverscripts', 'clientfiles', 'serverdata'], () => {
-//   // gulp.watch('src/**/*.{ts, json, html, md}', ['scripts', 'data']);
-// });
-
 var tasks = [
   'build_server',
-  'move_server_data',
-  'move_client_files'
+  'move_server_data'
 ];
 
 gulp.task('default', tasks);
