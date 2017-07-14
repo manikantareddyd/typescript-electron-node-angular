@@ -14,6 +14,7 @@ function do_server {
 }
 
 function do_client {
+    rm -r dist/client
     cp -r ./src/client ./dist/client
     node_modules/.bin/ngc -p dist/client/tsconfig-aot.json
     cp .\dist\client\main-aot.txt .\dist\client\main.ts
