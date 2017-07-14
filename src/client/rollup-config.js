@@ -3,8 +3,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 
 export default {
-    entry: 'main.js',
-    dest: 'build.js', // output a single application bundle
+    entry: 'dist/client/main.js',
+    dest: 'dist/client/build.js', // output a single application bundle
     sourceMap: false,
     format: 'iife',
     onwarn: function (warning) {
@@ -19,7 +19,7 @@ export default {
     plugins: [
         nodeResolve({ jsnext: true, module: true }),
         commonjs({
-            include: '../../node_modules/rxjs/**',
+            include: 'node_modules/rxjs/**',
             
         }),
         uglify()

@@ -18,7 +18,6 @@
     "app/app.module.ts",
     "main.ts"
   ],
-
   "angularCompilerOptions": {
    "genDir": "aot",
    "skipMetadataEmit" : true
