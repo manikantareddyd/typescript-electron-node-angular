@@ -1,5 +1,4 @@
-function do_all
-{
+function do_all {
     rm -r dist
     gulp
     cp -r ./src/client ./dist/client
@@ -10,13 +9,11 @@ function do_all
     node_modules\.bin\rollup -c dist/client/rollup-config.js
 }
 
-function do_server
-{
+function do_server {
     gulp build_server
 }
 
-function do_client 
-{
+function do_client {
     cp -r ./src/client ./dist/client
     node_modules/.bin/ngc -p dist/client/tsconfig-aot.json
     cp .\dist\client\main-aot.txt .\dist\client\main.ts
@@ -25,7 +22,7 @@ function do_client
     node_modules\.bin\rollup -c dist/client/rollup-config.js
 }
 
-switch($args[0]){
+switch ($args[0]) {
     "all" {
         do_all
     }
