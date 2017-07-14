@@ -16,10 +16,15 @@ gulp.task('serverscripts', () => {
     .pipe(gulp.dest('dist/server'));
 });
 
+// gulp.task('clientscripts', () => {
+//   return clientTsProject.src()
+//     .pipe(clientTsProject())
+//     .js
+//     .pipe(gulp.dest('dist/client'));
+// });
+
 gulp.task('clientscripts', () => {
   return clientTsProject.src()
-    .pipe(clientTsProject())
-    .js
     .pipe(gulp.dest('dist/client'));
 });
 
