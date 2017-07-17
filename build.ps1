@@ -10,7 +10,8 @@ function do_all {
 }
 
 function do_server {
-    gulp build_server
+    rm -r dist/server
+    gulp
 }
 
 function do_client {

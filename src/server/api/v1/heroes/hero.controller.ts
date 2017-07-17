@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Heroes from '../../../db/models/hero';
+import Heroes from '../../../db/models/heroes';
 
 export class HeroController {
     getAll(req: Request, res: Response) {

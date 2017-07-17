@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import SQLZ from './db/index';
-import Heroes from './db/models/hero';
+import Heroes from './db/models/heroes';
 
 
 import HeroRouter from './api/v1/heroes/hero.router';
