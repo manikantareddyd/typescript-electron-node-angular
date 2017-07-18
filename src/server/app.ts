@@ -2,9 +2,10 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as passport from 'passport';
 import SQLZ from './db/index';
 import Heroes from './db/models/heroes';
-
+import BaseRouter from './app.router';
 
 import HeroRouter from './api/v1/heroes/hero.router';
 // Creates and configures an ExpressJS web server.
@@ -30,25 +31,16 @@ class App {
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
-    this.express.use('/', express.static(path.join(__dirname, '../client')));
-    this.express.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
   }
 
   // Configure API endpoints.
   private routes(): void {
+    this.express.use('/', express.static(path.join(__dirname, '../client')));
+    this.express.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
+
+    
     this.express.use('/api/v1/heroes', HeroRouter);
-
-
-
-    let router = express.Router();
-    router.get('/', (req, res, next) => {
-      res.render("index");
-    });
-    router.get('*', (req, res, next) => {
-      res.redirect("/");
-    });
-    this.express.use('/', router);
-
+    this.express.use('/', BaseRouter);
   }
 
 }

@@ -10,6 +10,7 @@
   "author": "Manikanta Reddy D.",
   "license": "ISC",
   "devDependencies": {
+    "@angular/cli": "^1.2.1",
     "@types/angular": "^1.6.26",
     "@types/angular-animate": "^1.5.8",
     "@types/angular-cookies": "^1.4.4",
@@ -26,6 +27,8 @@
     "@types/jasmine": "^2.5.53",
     "@types/morgan": "^1.7.32",
     "@types/node": "^6.0.82",
+    "@types/passport": "^0.3.3",
+    "@types/passport-strategy": "^0.2.30",
     "@types/sequelize": "^4.0.65",
     "babel-cli": "^6.24.1",
     "babel-preset-angular2": "0.0.2",
@@ -64,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/manikantareddyd/node-angular-typescript-template.git"
+    "url": "git://github.com/manikantareddyd/node-angular-typescript-oauth2-template.git"
   },
   "dependencies": {
     "@angular/animations": "^4.2.6",
@@ -83,10 +86,15 @@
     "angular-in-memory-web-api": "^0.3.2",
     "async": "^2.5.0",
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "debug": "^2.6.8",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-strategy": "^1.0.0",
     "pg": "^6.4.1",
     "pg-hstore": "^2.3.2",
     "reflect-metadata": "^0.1.10",
