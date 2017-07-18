@@ -1,22 +1,26 @@
 import * as path from 'path';
 import * as express from 'express';
+import * as session from 'express-session';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
 import SQLZ from './db/index';
-import Heroes from './db/models/heroes';
-import BaseRouter from './app.router';
+import passportConfig from './auth/passport.config';
 
+import Heroes from './db/models/heroes';
+
+import BaseRouter from './app.router';
+import AuthRouter from './auth/auth.router';
 import HeroRouter from './api/v1/heroes/hero.router';
 // Creates and configures an ExpressJS web server.
 class App {
 
   // ref to Express instance
-  public express: express.Application;
+  public app: express.Application;
 
   //Run configuration methods on the Express instance.
   constructor() {
-    this.express = express();
+    this.app = express();
     // setup sequelizer
     SQLZ();
     this.middleware();
@@ -28,21 +32,25 @@ class App {
 
   // Configure Express middleware.
   private middleware(): void {
-    this.express.use(logger('dev'));
-    this.express.use(bodyParser.json());
-    this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(logger('dev'));
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(session({ secret: 'keyboard cat' }));
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+    passportConfig();
   }
 
   // Configure API endpoints.
   private routes(): void {
-    this.express.use('/', express.static(path.join(__dirname, '../client')));
-    this.express.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
+    this.app.use('/', express.static(path.join(__dirname, '../client')));
+    this.app.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
 
-    
-    this.express.use('/api/v1/heroes', HeroRouter);
-    this.express.use('/', BaseRouter);
+    this.app.use('/api/v1/heroes', HeroRouter);
+    this.app.use('/', AuthRouter);
+    this.app.use('/', BaseRouter);
   }
 
 }
 
-export default new App().express;
+export default new App().app;
