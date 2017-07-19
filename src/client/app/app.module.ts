@@ -6,12 +6,14 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppComponent } from './components/app/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroService } from './services/hero.service';
+import { AuthService } from './services/auth.service';
 
-import { AppRoutingModule } from './modules/app-routing.module';
+import { AppRouter } from './app.router';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -20,7 +22,7 @@ import { AuthGuard } from './_guards/auth.guard';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
+    AppRouter,
     HttpModule
   ],
   declarations: [
@@ -28,10 +30,12 @@ import { AuthGuard } from './_guards/auth.guard';
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   providers: [
     HeroService,
+    AuthService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

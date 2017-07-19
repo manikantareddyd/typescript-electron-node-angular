@@ -6,18 +6,18 @@ import HeroRouter from './api/v1/heroes/hero.router';
 
 
 
-let BaseRouter = express.Router();
+let AppRouter = express.Router();
 
-BaseRouter.use('/api/v1/heroes', HeroRouter);
+AppRouter.use('/api/v1/heroes', HeroRouter);
 
-BaseRouter.use('/', AuthRouter);
+AppRouter.use('/', AuthRouter);
 
-BaseRouter.get('/', (req, res, next) => {
+AppRouter.get('/', (req, res, next) => {
   res.render("index");
 });
 
-BaseRouter.get('*', (req, res, next) => {
+AppRouter.get('*', (req, res, next) => {
   res.redirect("/");
 });
 
-export default BaseRouter;
+export default AppRouter;

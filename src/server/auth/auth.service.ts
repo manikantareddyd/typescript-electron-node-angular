@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-
+import * as uuid from 'uuid/v4';
 class AuthService {
     public validatePassword(user, password) {
         let salt = user.salt;
@@ -7,10 +7,12 @@ class AuthService {
         return (hashpass === user.hashpass);
     }
 
-    public genHashPass(password: string){
+    public genUser(username: string, password: string){
         let salt = this.genSalt();
         let hashpass = this.hashPassword(password, salt);
         return {
+            id: uuid(),
+            username: username,
             salt: salt,
             hashpass: hashpass
         };

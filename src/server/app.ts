@@ -9,7 +9,7 @@ import passportConfig from './auth/passport.config';
 
 import Heroes from './db/models/heroes';
 
-import BaseRouter from './app.router';
+import AppRouter from './app.router';
 // Creates and configures an ExpressJS web server.
 class App {
 
@@ -43,7 +43,7 @@ class App {
   private routes(): void {
     this.app.use('/', express.static(path.join(__dirname, '../client')));
     this.app.use('/node_modules', express.static(path.join(__dirname, '../../node_modules')));
-    this.app.use('/', BaseRouter);
+    this.app.use('/', AppRouter);
   }
 
 }
