@@ -8,7 +8,7 @@ AuthRouter.post('/login',
         'local',
         {
             successRedirect: '/',
-            failureRedirect: '/login'
+            failureRedirect: '/'
         }
     ),
     function (req, res) {

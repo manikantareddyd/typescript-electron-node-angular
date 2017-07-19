@@ -5,11 +5,15 @@ import { HttpModule, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AppComponent } from './components/app/app.component';
+import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroService } from './services/hero.service';
+
 import { AppRoutingModule } from './modules/app-routing.module';
+
+import { AuthGuard } from './_guards/auth.guard';
 
 
 @NgModule({
@@ -23,9 +27,13 @@ import { AppRoutingModule } from './modules/app-routing.module';
     AppComponent,
     DashboardComponent,
     HeroDetailComponent,
-    HeroesComponent
+    HeroesComponent,
+    LoginComponent
   ],
-  providers: [HeroService],
+  providers: [
+    HeroService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
