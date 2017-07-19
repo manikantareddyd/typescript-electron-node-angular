@@ -1,7 +1,8 @@
 import { Hero } from '../classes/hero';
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from './auth.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -11,10 +12,13 @@ export class HeroService {
 
   private getAllUrl = 'api/v1/heroes/getAll';
   private getOneUrl = 'api/v1/heroes/getOne';
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
   getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.getAllUrl)
+    let token = this.authService.getAuthdetails()["token"]
+    let headers = new Headers({ 'Authorization': 'Bearer '+token  });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.getAllUrl, options)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
@@ -22,7 +26,10 @@ export class HeroService {
 
 
   getHero(id: number): Promise<Hero> {
-    return this.http.get(this.getOneUrl + '/' + id.toString())
+    let token = this.authService.getAuthdetails()["token"]
+    let headers = new Headers({ 'Authorization': 'Bearer '+token  });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.getOneUrl + '/' + id.toString(), options)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);

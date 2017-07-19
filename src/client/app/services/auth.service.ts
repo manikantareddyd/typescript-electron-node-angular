@@ -10,6 +10,7 @@ export class AuthService {
 
     private loginUrl = 'login';
     private registerUrl = 'register';
+    private validateUrl = 'validateToken';
     constructor(private http: Http) { }
 
     public login(username: string, password: string) {
@@ -18,7 +19,7 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.loginUrl, body, options)
             .toPromise()
-            .then()
+            .then(this.saveToken)
             .catch();
     }
 
@@ -28,13 +29,26 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.registerUrl, body, options)
             .toPromise()
-            .then()
+            .then(this.saveToken)
             .catch();
     }
 
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
+    public saveToken(res: Response) {
+        let body = JSON.parse(res["_body"]);
+        let token = body["token"];
+        let username = body["username"];
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
+        console.log(res);
+    }
+
+    public getAuthdetails(){
+        let token = localStorage["token"];
+        let username = localStorage["username"];
+        return {
+            token: token,
+            username: username
+        };
     }
 
     private handleError(error: Response | any) {
