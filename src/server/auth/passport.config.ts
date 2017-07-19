@@ -30,11 +30,13 @@ function configure_passport(): void {
     ));
 
     passport.serializeUser<any, any>((user, done) => {
-        done(undefined, user.id);
+        done(undefined, user.username);
     });
 
-    passport.deserializeUser((id: string, done) => {
-        Users.findById(id).then((user: Users)=>done(null, user)).catch(err=>{done(err, null)});
+    passport.deserializeUser((username: string, done) => {
+        //Users.findById(id).then((user: Users)=>done(null, user)).catch(err=>{done(err, null)});
+        let user = {username: username}
+        done(null, user)
     });
 }
 

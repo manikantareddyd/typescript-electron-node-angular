@@ -12,7 +12,7 @@ AuthRouter.post('/login',
         'local',
         {
             successRedirect: '/sendToken',
-            failureRedirect: '/',
+            failureRedirect: '/loginFailure',
             session: true
         }
     )
@@ -22,6 +22,7 @@ AuthRouter.post('/login',
 
 AuthRouter.post('/register', AuthController.registerUser)
 AuthRouter.get('/sendToken', AuthController.sendToken);
+AuthRouter.get('/loginFailure', AuthController.loginFailure);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
 
 

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public username: string;
   public password: string;
+  public message: string;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -17,7 +18,13 @@ export class LoginComponent implements OnInit {
 
   public onSubmit(){
     console.log(this.username, this.password);
-    this.authService.login(this.username, this.password);
+    this.authService.login(this.username, this.password)
+    .then(success=>{
+      if(success)
+        location.reload();
+      else
+        this.message = "Incorrect username or password";
+    });
   }
 
   public goToRegister(){

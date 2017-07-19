@@ -14,7 +14,10 @@ export class AuthController {
         }).then(user => {
             if (user) {
                 console.log("User Exists");
-                return;
+                let body = {
+                    success: 0
+                }
+                res.send(body);
             }
             else {
                 let secrets = AuthService.genUser(username, password);
@@ -24,7 +27,8 @@ export class AuthController {
                         let token = AuthService.getToken(username);
                         res.send({
                             username: username,
-                            token: token
+                            token: token,
+                            success: 1
                         });
                     });
             }
@@ -36,12 +40,20 @@ export class AuthController {
         // console.log("Here at send token", token);
         let body = {
             username: req.user.username,
-            token: token
+            token: token,
+            success: 1
         }
         res.send(body);
     }
 
-    validateToken(req: Request, res: Response){
+    loginFailure(req: Request, res: Response) {
+        let body = {
+            success: 0
+        }
+        res.send(body);
+    }
+
+    validateToken(req: Request, res: Response) {
         res.send({
             status: 1
         })

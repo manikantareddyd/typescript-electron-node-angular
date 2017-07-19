@@ -7,10 +7,10 @@
         <label>Password:</label>
         <input type="password" [(ngModel)]="password" name="password" />
     </div>
+    <p>{{message}}</p>
     <div>
         <input type="submit" value="Log In" />
     </div>
-    <h1>{{username}}</h1>
 </form>
 <div>
     <button value="Register" (click)="goToRegister()">New User?</button>

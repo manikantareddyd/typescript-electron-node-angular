@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -11,8 +12,12 @@ export class AuthService {
     private loginUrl = 'login';
     private registerUrl = 'register';
     private validateUrl = 'validateToken';
-    constructor(private http: Http) { }
+    constructor(private http: Http, private router: Router ) { }
 
+    public logout(){
+        localStorage.clear();
+        location.reload();
+    }
     public login(username: string, password: string) {
         let body = "username=" + username + "&password=" + password;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -35,11 +40,14 @@ export class AuthService {
 
     public saveToken(res: Response) {
         let body = JSON.parse(res["_body"]);
+        let success = body["success"];
+        if(!success) return 0;
         let token = body["token"];
         let username = body["username"];
         localStorage.setItem("token", token);
         localStorage.setItem("username", username);
         console.log(res);
+        return success;
     }
 
     public getAuthdetails(){
