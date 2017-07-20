@@ -1,13 +1,16 @@
-<div class="container">
+<div class="container" style="width:33%">
   <div *ngIf="hero">
     <h2>{{hero.name}} details!</h2>
-    <div>
-      <label>id: </label>{{hero.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="hero.name" placeholder="name" />
-    </div>
-    <button (click)="goBack()">Back</button>
-    <img src="./assets/img/favicon.ico">
+    <table class="table">
+      <tr>
+        <td>Id</td>
+        <td>{{hero.id}}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{hero.name}}</td>
+      </tr>
+    </table>
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
   </div>
 </div>

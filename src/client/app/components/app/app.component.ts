@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Tour of Harambe 9.0';
+  title = 'Tour of Heroes 2.0';
   public username: string = null;
 
   constructor(private authService: AuthService, private router: Router){
