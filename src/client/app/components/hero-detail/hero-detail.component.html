@@ -1,16 +1,13 @@
-<div class="container" style="width:33%">
-  <div *ngIf="hero">
-    <h2>{{hero.name}} details!</h2>
-    <table class="table">
-      <tr>
-        <td>Id</td>
-        <td>{{hero.id}}</td>
-      </tr>
-      <tr>
-        <td>Name</td>
-        <td>{{hero.name}}</td>
-      </tr>
-    </table>
-    <button class="btn btn-primary" (click)="goBack()">Back</button>
-  </div>
-</div>
+<md-card *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+  <table class="table">
+    <tr>
+      <td>Id</td>
+      <td>{{hero.id}}</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>{{hero.name}}</td>
+    </tr>
+  </table>
+</md-card>

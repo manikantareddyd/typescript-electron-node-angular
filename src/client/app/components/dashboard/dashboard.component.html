@@ -1,10 +1,10 @@
-<div class="container">
-  <h3>Top Heroes</h3>
-  <div class="grid grid-pad">
-    <a *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
-      <div class="module hero">
-        <h4>{{hero.name}}</h4>
-      </div>
-    </a>
-  </div>
-</div>
+ <div class="container"> 
+  <h2>Top Heroes</h2>
+  <md-grid-list cols="2" rowHeight="2:1">
+    <md-grid-tile *ngFor="let hero of heroes" (click)="gotoDetail(hero)">
+        <div class="module hero">
+          <h4>{{hero.name}}</h4>
+        </div>
+    </md-grid-tile>
+  </md-grid-list>
+ </div> 

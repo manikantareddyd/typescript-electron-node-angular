@@ -1,11 +1,8 @@
-<div class="container" style="width:33%">
+<div class="container">
   <h2>My Heroes</h2>
-  <ul class="heroes">
-    <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="gotoDetail(hero)">
-        <button class="btn btn-default">
-          <span class="badge">{{hero.id}}</span>
-        </button> 
-        {{hero.name}}
-    </li>
-  </ul>
+  <md-grid-list cols="3" rowHeight="2:1">
+    <md-grid-tile *ngFor="let hero of heroes" (click)="gotoDetail(hero)">
+        {{hero.id}}. {{hero.name}}
+    </md-grid-tile>
+  </md-grid-list>
 </div>

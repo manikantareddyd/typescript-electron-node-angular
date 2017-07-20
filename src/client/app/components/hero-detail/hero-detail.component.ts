@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { MD_DIALOG_DATA } from '@angular/material';
 import { Hero } from '../../classes/hero';
 import { HeroService } from '../../services/hero.service';
 @Component({
@@ -11,18 +11,17 @@ import { HeroService } from '../../services/hero.service';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero;
+  public hero: Hero;
 
   constructor(
     private heroService: HeroService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    @Inject(MD_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-      .subscribe(hero => this.hero = hero);
+    this.hero = this.data;
   }
 
   goBack(): void {

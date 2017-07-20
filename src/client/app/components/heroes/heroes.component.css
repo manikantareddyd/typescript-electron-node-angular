@@ -12,3 +12,12 @@
 .heroes .text {
   position: relative;
 }
+
+md-grid-tile {
+  background: lightblue;
+
+}
+
+h2 {
+  text-align: center;
+}
