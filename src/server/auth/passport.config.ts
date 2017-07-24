@@ -1,7 +1,9 @@
 import * as passport from 'passport';
 import * as LocalStrategy from 'passport-local';
+import * as FacebookStrategy from 'passport-facebook';
 import Users from '../db/models/users';
 import AuthService from './auth.service';
+const config = require('./config');
 function configure_passport(): void {
     passport.use(new LocalStrategy(
         function (username: string, password: string, done) {
@@ -30,12 +32,12 @@ function configure_passport(): void {
     ));
 
     passport.serializeUser<any, any>((user, done) => {
-        done(undefined, user.username);
+        done(undefined, user.id);
     });
 
-    passport.deserializeUser((username: string, done) => {
+    passport.deserializeUser((id: string, done) => {
         //Users.findById(id).then((user: Users)=>done(null, user)).catch(err=>{done(err, null)});
-        let user = {username: username}
+        let user = {id: id}
         done(null, user)
     });
 }

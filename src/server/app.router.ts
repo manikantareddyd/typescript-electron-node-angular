@@ -10,7 +10,7 @@ let AppRouter = express.Router();
 
 AppRouter.use('/api/v1/heroes', HeroRouter);
 
-AppRouter.use('/', AuthRouter);
+AppRouter.use('/auth', AuthRouter);
 
 AppRouter.get('/', (req, res, next) => {
   res.render("index");

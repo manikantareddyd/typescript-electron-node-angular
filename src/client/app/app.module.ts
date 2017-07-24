@@ -16,8 +16,7 @@ import { AuthService } from './services/auth.service';
 
 import { AppRouter } from './app.router';
 import { MaterialModule } from './modules/material.module';
-
-
+import 'hammerjs';
 import { AuthGuard } from './_guards/auth.guard';
 
 

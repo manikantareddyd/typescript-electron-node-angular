@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Tour of Heroes 2.0';
-  public username: string = null;
+  public id: string = null;
 
   constructor(private authService: AuthService, private router: Router){
-    this.setUsername();
+    this.setId();
   }
 
-  private setUsername(){
-    this.username = this.authService.getAuthdetails()["username"];
+  private setId(){
+    this.id = this.authService.getAuthdetails()["id"];
   }
 
   public logout(){

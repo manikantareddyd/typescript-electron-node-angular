@@ -9,9 +9,9 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
 
-    private loginUrl = 'login';
-    private registerUrl = 'register';
-    private validateUrl = 'validateToken';
+    private loginUrl = 'auth/login';
+    private registerUrl = 'auth/register';
+    private validateUrl = 'auth/validateToken';
     constructor(private http: Http, private router: Router ) { }
 
     public logout(){
@@ -43,19 +43,19 @@ export class AuthService {
         let success = body["success"];
         if(!success) return 0;
         let token = body["token"];
-        let username = body["username"];
+        let id = body["id"];
         localStorage.setItem("token", token);
-        localStorage.setItem("username", username);
+        localStorage.setItem("id", id);
         console.log(res);
         return success;
     }
 
     public getAuthdetails(){
         let token = localStorage["token"];
-        let username = localStorage["username"];
+        let id = localStorage["id"];
         return {
             token: token,
-            username: username
+            id: id
         };
     }
 

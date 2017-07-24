@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 
 dist/*
+
+src/server/auth/config.json

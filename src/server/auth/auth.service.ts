@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import AuthSecrets from './auth.secrets';
 import Users from '../db/models/users'
 class AuthService {
-    public validatePassword(user: Users, password) {
+    public validatePassword(user, password) {
         let salt = user.salt;
         let hashpass = this.hashPassword(password, salt);
         return (hashpass === user.hashpass);
@@ -35,9 +35,9 @@ class AuthService {
         return salt;
     }
 
-    public getToken(username: string){
+    public getToken(id: string){
         let payload = {
-            username: username,
+            id: id,
         };
         let token = jwt.sign(
             payload,

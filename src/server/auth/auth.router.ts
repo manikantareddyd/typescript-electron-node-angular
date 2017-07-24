@@ -7,21 +7,8 @@ let authenticate = expressJwt({secret: AuthSecrets.jwt_secret})
 
 let AuthRouter = express.Router();
 
-AuthRouter.post('/login',
-    passport.authenticate(
-        'local',
-        {
-            successRedirect: '/sendToken',
-            failureRedirect: '/loginFailure',
-            session: true
-        }
-    )
-);
-
-
-
+AuthRouter.post('/login', AuthController.loginUser);
 AuthRouter.post('/register', AuthController.registerUser)
-AuthRouter.get('/sendToken', AuthController.sendToken);
 AuthRouter.get('/loginFailure', AuthController.loginFailure);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
 
