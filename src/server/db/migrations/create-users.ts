@@ -14,6 +14,31 @@ class CreateUsers {
       },
       salt: {
         type: Sequelize.STRING
+      },
+      provider: {
+        type: Sequelize.STRING
+      },
+      provider_id: {
+        type: Sequelize.STRING
+      },
+      displayName: {
+        type: Sequelize.STRING
+      },
+      familyName: {
+        type: Sequelize.STRING
+      },
+      givenName: {
+        type: Sequelize.STRING
+      },
+      middleName: {
+        type: Sequelize.STRING
+      },
+      email: {
+        unique: true,
+        type: Sequelize.STRING
+      },
+      photos: {
+        type: Sequelize.STRING
       }
     });
   }
