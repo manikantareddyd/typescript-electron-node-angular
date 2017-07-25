@@ -4,7 +4,7 @@ import AuthLocalController  from './auth.local.controller';
 import AuthController from './auth.controller';
 import * as expressJwt  from 'express-jwt';
 import AuthSecrets from './auth.secrets';
-let authenticate = expressJwt({secret: AuthSecrets.jwt_secret})
+let authenticate = expressJwt({secret: AuthSecrets.jwt.secret})
 
 let AuthRouter = express.Router();
 

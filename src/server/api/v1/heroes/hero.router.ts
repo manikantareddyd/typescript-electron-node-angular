@@ -9,7 +9,7 @@ export class HeroRouter {
      * endpoints.
      */
     constructor() {
-        let authenticate = expressJwt({secret: AuthSecrets.jwt_secret})
+        let authenticate = expressJwt({secret: AuthSecrets.jwt.secret})
         this.router = Router();
         this.router.get('/getAll', authenticate, HeroController.getAll);
         this.router.get('/getOne/:id', authenticate, HeroController.getOne);

@@ -1,0 +1,10 @@
+{
+    "facebook": {
+        "app_id": "440620813003492",
+        "app_secret": "49b9e429e89438d063f1a7a6525d38aa",
+        "callback": "http://localhost:3000/auth/facebook/callback"
+    },
+    "jwt":{
+        "secret":"HakunaMatata"
+    }
+}

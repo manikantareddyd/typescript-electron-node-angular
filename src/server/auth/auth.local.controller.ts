@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Users from '../db/models/users';
+import Users from '../db/pppp/users';
 import AuthService from './auth.service';
 
 export class AuthLocalController {
@@ -7,9 +7,7 @@ export class AuthLocalController {
         let username = req.body["username"];
         let password = req.body["password"];
         Users.findOne({
-            where: {
-                username: username
-            }
+            username: username
         }).then(user => {
             if (user) {
                 console.log("User Exists");
@@ -22,7 +20,7 @@ export class AuthLocalController {
                     console.log("Valid Password");
                     let token = AuthService.getToken(user.id);
                     let body = {
-                        id: user.id,
+                        id: user._id,
                         token: token,
                         success: 1
                     }
@@ -42,9 +40,7 @@ export class AuthLocalController {
         let password = req.body["password"];
         console.log("Register", username, password);
         Users.findOne({
-            where: {
-                username: username
-            }
+            username: username
         }).then(user => {
             if (user) {
                 console.log("User Exists");
@@ -54,10 +50,11 @@ export class AuthLocalController {
             }
             else {
                 let secrets = AuthService.genUser(username, password);
-                Users.create(secrets)
+                let newuser = new Users(secrets);
+                newuser.save()
                     .then(dbres => {
-                        console.log("User Created", secrets.username, secrets.id);
-                        let id = secrets.id;
+                        console.log("User Created", secrets.username, secrets._id);
+                        let id = secrets._id;
                         let token = AuthService.getToken(id);
                         res.send({
                             id: id,

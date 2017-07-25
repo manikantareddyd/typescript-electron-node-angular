@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import * as uuid from 'uuid/v4';
 import * as jwt from 'jsonwebtoken';
 import AuthSecrets from './auth.secrets';
-import Users from '../db/models/users'
+import Users from '../db/pppp/users'
 class AuthService {
     public validatePassword(user, password) {
         let salt = user.salt;
@@ -14,7 +14,7 @@ class AuthService {
         let salt = this.genSalt();
         let hashpass = this.hashPassword(password, salt);
         return {
-            id: uuid(),
+            _id: uuid(),
             username: username,
             salt: salt,
             hashpass: hashpass
@@ -41,7 +41,7 @@ class AuthService {
         };
         let token = jwt.sign(
             payload,
-            AuthSecrets.jwt_secret
+            AuthSecrets.jwt.secret
         );
         return token;
     }
