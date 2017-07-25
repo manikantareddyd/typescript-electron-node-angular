@@ -4,7 +4,6 @@ import * as session from 'express-session';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
-import SQLZ from './db/index';
 import * as mongoose from 'mongoose';
 import passportConfig from './auth/passport.config';
 
@@ -21,11 +20,9 @@ class App {
   constructor() {
     this.app = express();
     mongoose.connect('mongodb://localhost:27017/test');
-    // setup sequelizer
-    SQLZ();
     this.middleware();
     this.routes();
-    Heroes.count().then(c => {
+    Heroes.count({}).exec().then(c => {
       console.log("Heroes Count:\t", c);
     });
   }

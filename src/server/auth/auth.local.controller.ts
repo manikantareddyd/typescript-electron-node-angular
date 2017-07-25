@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Users from '../db/pppp/users';
+import Users from '../db/models/users';
 import AuthService from './auth.service';
 
 export class AuthLocalController {
@@ -8,7 +8,7 @@ export class AuthLocalController {
         let password = req.body["password"];
         Users.findOne({
             username: username
-        }).then(user => {
+        }).exec().then(user => {
             if (user) {
                 console.log("User Exists");
                 if (!AuthService.validatePassword(user, password)) {
@@ -41,7 +41,7 @@ export class AuthLocalController {
         console.log("Register", username, password);
         Users.findOne({
             username: username
-        }).then(user => {
+        }).exec().then(user => {
             if (user) {
                 console.log("User Exists");
                 res.send({

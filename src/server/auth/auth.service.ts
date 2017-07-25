@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import * as uuid from 'uuid/v4';
 import * as jwt from 'jsonwebtoken';
 import AuthSecrets from './auth.secrets';
-import Users from '../db/pppp/users'
+import Users from '../db/models/users'
 class AuthService {
     public validatePassword(user, password) {
         let salt = user.salt;

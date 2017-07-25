@@ -3,23 +3,17 @@ import Heroes from '../../../db/models/heroes';
 
 export class HeroController {
     getAll(req: Request, res: Response) {
-        return Heroes.findAll().then(
-            heroes => {
-                res.status(200).send(heroes);
-            }
-        )
+        return Heroes.find({}).exec().then(heroes => {
+            res.status(200).send(heroes);
+        });
     }
 
     getOne(req: Request, res: Response) {
         return Heroes.findOne({
-            where: {
-                id: req.params['id']
-            }
-        }).then(
-            hero => {
-                res.status(200).send(hero);
-            }
-            )
+            id: req.params['id']
+        }).exec().then(hero => {
+            res.status(200).send(hero);
+        });
     }
 }
 

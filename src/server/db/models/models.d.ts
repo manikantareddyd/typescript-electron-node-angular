@@ -1,4 +1,10 @@
 import * as mongoose from 'mongoose';
+
+export interface IHero extends mongoose.Document {
+    id: string,
+    name: string
+}
+
 interface ISocialProfile {
   id: string,
   token: string,
@@ -6,7 +12,7 @@ interface ISocialProfile {
   photos: string[]
 }
 
-export default interface IUser extends mongoose.Document {
+export interface IUser extends mongoose.Document {
   _id: string,
   username: string,
   password: string,
