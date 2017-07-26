@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './_guards/auth.guard';
+import { AuthGuard } from './_guards';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
-import { LoginComponent } from './components/login/login.component';
-import { UsernameComponent } from './components/username/username.component';
-import { RegisterComponent } from './components/register/register.component';
+import {
+    LoginComponent,
+    UsernameComponent,
+    RegisterComponent,
+    DashboardComponent,
+    HeroesComponent
+} from './components/';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

@@ -5,20 +5,33 @@ import { HttpModule, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDialogModule} from '@angular/material';
-import { AppComponent } from './components/app/app.component';
-import { LoginComponent } from './components/login/login.component';
-import { UsernameComponent } from './components/username/username.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroService } from './services/hero.service';
-import { AuthService } from './services/auth.service';
+
+import {
+    AppComponent,
+    LoginComponent,
+    UsernameComponent,
+    RegisterComponent,
+    DashboardComponent,
+    HeroDetailComponent,
+    HeroesComponent
+} from './components/';
+
+import {
+    HeroService,
+    AuthService
+} from './services';
 
 import { AppRouter } from './app.router';
-import { MaterialModule } from './modules/material.module';
+
+import { 
+  MaterialModule 
+} from './modules';
+
+import { 
+  AuthGuard 
+} from './_guards';
+
 import 'hammerjs';
-import { AuthGuard } from './_guards/auth.guard';
 
 
 @NgModule({

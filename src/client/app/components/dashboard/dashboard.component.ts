@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { Hero } from '../../classes/hero';
-import { HeroService } from '../../services/hero.service';
-import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
+import { Hero } from '../../classes';
+import { HeroService } from '../../services';
+import { HeroDetailComponent } from '../../components';
 @Component({
   selector: 'my-dashboard',
   templateUrl: './dashboard.component.html',
