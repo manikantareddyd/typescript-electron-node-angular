@@ -16,7 +16,7 @@ export interface IUser extends mongoose.Document {
   _id: string,
   username: string,
   password: string,
-  emails: string[],
+  primaryEmail: string,
   name: {
     familyName: string,
     givenName: string,

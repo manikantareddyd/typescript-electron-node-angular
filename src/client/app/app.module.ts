@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDialogModule} from '@angular/material';
 import { AppComponent } from './components/app/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { UsernameComponent } from './components/username/username.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
@@ -34,6 +35,7 @@ import { AuthGuard } from './_guards/auth.guard';
     DashboardComponent,
     HeroDetailComponent,
     LoginComponent,
+    UsernameComponent,
     RegisterComponent,
     HeroesComponent
   ],

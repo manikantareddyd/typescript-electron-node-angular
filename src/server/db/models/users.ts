@@ -10,7 +10,6 @@ let userSchema = new mongoose.Schema({
   hashpass: String,
   salt: String,
   primaryEmail: { type: String, index: true, unique: true },
-  emails: [String],
   name: {
     familyName: String,
     givenName: String,

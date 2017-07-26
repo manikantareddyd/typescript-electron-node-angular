@@ -10,6 +10,9 @@ class AuthService {
         return (hashpass === user.hashpass);
     }
 
+    public genId(){
+        return uuid();
+    }
     public genUser(username: string, password: string){
         let salt = this.genSalt();
         let hashpass = this.hashPassword(password, salt);

@@ -12,6 +12,7 @@ export class AuthService {
     private loginUrl = 'auth/login';
     private registerUrl = 'auth/register';
     private validateUrl = 'auth/validateToken';
+    private updateUsernameUrl = 'auth/updateUsername';
     constructor(private http: Http, private router: Router ) { }
 
     public logout(){
@@ -38,24 +39,38 @@ export class AuthService {
             .catch();
     }
 
+    public updateUsername(username: string){
+        let body = "username=" + username+"&id="+localStorage["id"];
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.updateUsernameUrl, body, options)
+            .toPromise()
+            .then(this.saveToken)
+            .catch();
+    }
+
     public saveToken(res: Response) {
         let body = JSON.parse(res["_body"]);
         let success = body["success"];
         if(!success) return 0;
         let token = body["token"];
         let id = body["id"];
+        let username = body["username"];
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
+        localStorage.setItem("username", username);
         console.log(res);
         return success;
     }
 
     public getAuthdetails(){
+        let username = localStorage['username'];
         let token = localStorage["token"];
         let id = localStorage["id"];
         return {
             token: token,
-            id: id
+            id: id,
+            username: username
         };
     }
 

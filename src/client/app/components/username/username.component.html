@@ -1,0 +1,9 @@
+<div class="container">
+    <form class="form-signin" (ngSubmit)="onSubmit()">
+        <h2 class="form-signin-heading">Choose a Username!</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" [(ngModel)]="username" placeholder="Username" required autofocus>
+        <p>{{message}}</p>
+        <button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
+    </form>
+</div>

@@ -5,7 +5,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
 import * as mongoose from 'mongoose';
-import passportConfig from './auth/passport.config';
+import passportConfig from './auth/passport/passport.config';
 
 import Heroes from './db/models/heroes';
 
@@ -19,10 +19,10 @@ class App {
   //Run configuration methods on the Express instance.
   constructor() {
     this.app = express();
-    mongoose.connect('mongodb://localhost:27017/test');
+    mongoose.connect('mongodb://localhost:27017/sample');
     this.middleware();
     this.routes();
-    Heroes.count({}).exec().then(c => {
+    Heroes.count({}, function(err, c){
       console.log("Heroes Count:\t", c);
     });
   }
