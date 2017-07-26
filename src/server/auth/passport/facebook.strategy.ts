@@ -6,6 +6,8 @@ import AuthService from '../auth.service';
 import * as fs from 'fs';
 
 export default new FacebookStrategy({
+    authorizationURL: AuthSecrets.facebook.auth_url,
+    tokenUrl: AuthSecrets.facebook.token_url,
     clientID: AuthSecrets.facebook.app_id,
     clientSecret: AuthSecrets.facebook.app_secret,
     callbackURL: AuthSecrets.facebook.callback,
@@ -15,10 +17,9 @@ export default new FacebookStrategy({
     function (req, token, refreshToken, profile, done) {
         // asynchronous
         process.nextTick(function () {
-            req.user = {}
-            req.user._id = req.headers["id"];
+            let id = req.headers["id"];
             // check if the user is already logged in
-            if (!req.user) {
+            if (!id) {
                 // New User
                 Users.findOne({ 'facebook.id': profile.id }, function (err, user) {
                     if (err) {
@@ -65,13 +66,13 @@ export default new FacebookStrategy({
             } else {
                 Users.findOne({ facebook: { id: profile.id } },
                     function (err, user) {
-                        if (user._id != req.user._id) {
+                        if (user._id != id) {
                             // facebook already registered with different account
                             return done(null, null, "linked elsewhere");
                         } else {
                             // user already exists and is logged in, we have to link accounts
                             // This facebook id is not registered before
-                            let id = req.user._id; // pull the user out of the session
+                             // pull the user out of the session
                             Users.findByIdAndUpdate(id, {
                                 'facebook': {
                                     id: profile.id,

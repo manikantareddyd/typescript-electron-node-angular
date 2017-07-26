@@ -1,4 +1,6 @@
 interface Facebook {
+    token_url: string,
+    auth_url: string,
     app_id: string;
     app_secret: string;
     callback: string;

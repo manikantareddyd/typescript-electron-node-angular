@@ -31,4 +31,21 @@ export class LoginComponent implements OnInit {
     console.log("Register Clicked");
     this.router.navigate(["register"]);
   }
+
+  public gotoFacebook(){
+    console.log("Facebook clicked");
+    this.authService.facebook(null)
+    .then(success=>{
+      if(success==3){
+        this.message = "Facebook account already linked with someone else!"
+      }
+      else if(success==1){
+        location.reload();
+      }
+      else{
+        this.message ="hey ram"
+      }
+      
+    });
+  }
 }

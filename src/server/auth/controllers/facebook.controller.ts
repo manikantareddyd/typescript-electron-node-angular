@@ -5,9 +5,9 @@ import * as passport from 'passport';
 export class AuthFacebookController {
 
     public authenticate(req: Request, res: Response, next: NextFunction) {
-        req.user = req.query["id"];
-        req.authInfo = req.query["id"];
-        passport.authenticate('facebook', { scope: ['email', 'profile'] })(req, res, next);
+        console.log(req.headers["id"], req.query["id"], "authen");
+        req.headers["id"] = req.query["id"];
+        passport.authenticate('facebook', { scope: ['email'] })(req, res, next);
     }
     public callback(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"]);        
@@ -18,7 +18,7 @@ export class AuthFacebookController {
                 })
             }
             res.send({
-                id: user.id,
+                id: user._id,
                 username: (user.username) ? user.username : null,
                 token: AuthService.getToken(user.id),
                 success: 1

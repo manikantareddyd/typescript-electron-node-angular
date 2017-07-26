@@ -13,6 +13,7 @@ export class AuthService {
     private registerUrl = 'auth/register';
     private validateUrl = 'auth/validateToken';
     private updateUsernameUrl = 'auth/updateUsername';
+    private facebookUrl = 'auth/facebook';
     constructor(private http: Http, private router: Router ) { }
 
     public logout(){
@@ -52,14 +53,16 @@ export class AuthService {
     public saveToken(res: Response) {
         let body = JSON.parse(res["_body"]);
         let success = body["success"];
-        if(!success) return 0;
-        let token = body["token"];
-        let id = body["id"];
-        let username = body["username"];
-        localStorage.setItem("token", token);
-        localStorage.setItem("id", id);
-        localStorage.setItem("username", username);
-        console.log(res);
+        console.log(success);
+        if(success==1){
+            let token = body["token"];
+            let id = body["id"];
+            let username = body["username"];
+            localStorage.setItem("token", token);
+            localStorage.setItem("id", id);
+            localStorage.setItem("username", username);
+            console.log(res, success);
+        }
         return success;
     }
 
@@ -86,5 +89,14 @@ export class AuthService {
         }
         console.error(errMsg);
         return Observable.throw(errMsg);
+    }
+
+    public facebook(id: string){
+        let headers = new Headers({ 'id': id, 'Access-Control-Allow-Origin': '*' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.facebookUrl+"?id="+id, options)
+            .toPromise()
+            .then(this.saveToken)
+            .catch(this.handleError);
     }
 }

@@ -1,5 +1,7 @@
 {
     "facebook": {
+        "token_url": "https://graph.facebook.com/v2.10/oauth/access_token",
+        "auth_url": "https://www.facebook.com/v2.10/dialog/oauth",
         "app_id": "440620813003492",
         "app_secret": "49b9e429e89438d063f1a7a6525d38aa",
         "callback": "http://localhost:3000/auth/facebook/callback"
