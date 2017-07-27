@@ -1,7 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import HeroController from './hero.controller';
-import * as expressJwt  from 'express-jwt';
-import AuthSecrets from '../../../auth/auth.secrets';
 export class HeroRouter {
     router: Router
     /**
@@ -9,10 +7,9 @@ export class HeroRouter {
      * endpoints.
      */
     constructor() {
-        let authenticate = expressJwt({secret: AuthSecrets.jwt.secret})
         this.router = Router();
-        this.router.get('/getAll', authenticate, HeroController.getAll);
-        this.router.get('/getOne/:id', authenticate, HeroController.getOne);
+        this.router.get('/getAll', HeroController.getAll);
+        this.router.get('/getOne/:id', HeroController.getOne);
     }
 
 }

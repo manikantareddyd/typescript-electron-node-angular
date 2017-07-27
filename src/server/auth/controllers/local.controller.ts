@@ -24,10 +24,10 @@ export class AuthLocalController {
                 } else {
                     console.log("Valid Password");
                     let token = AuthService.getToken(user.id);
+                    res.cookie("id", user._id)
+                    res.cookie("username", user.username);
+                    res.cookie("token", token, {httpOnly: true});
                     res.send({
-                        id: user._id,
-                        username: user.username,
-                        token: token,
                         success: 1
                     });
                 }
@@ -65,10 +65,10 @@ export class AuthLocalController {
                     .then(dbres => {
                         console.log("User Created", secrets.username, secrets._id);
                         let token = AuthService.getToken(secrets._id);
+                        res.cookie("id", secrets._id)
+                        res.cookie("username", secrets.username);
+                        res.cookie("token", token, {httpOnly: true});
                         res.send({
-                            id: secrets._id,
-                            username: secrets.username,
-                            token: token,
                             success: 1
                         });
                     });
@@ -76,15 +76,7 @@ export class AuthLocalController {
         })
     }
 
-    sendToken(req: Request, res: Response) {
-        console.log("Success Redirect");
-        res.send({
-            token: AuthService.getToken(req.user.id),
-            id: req.user.id,
-            username: null,
-            success: 1
-        });
-    }
+    
 
     updateUsername(req: Request, res: Response) {
         let id = req.body["id"];
@@ -108,10 +100,10 @@ export class AuthLocalController {
                         })
                     }
                     let token = AuthService.getToken(user._id);
+                    res.cookie("id", id)
+                    res.cookie("username", username);
+                    res.cookie("token", token, { httpOnly: true });
                     res.send({
-                        id: id,
-                        token: token,
-                        username: username,
                         success: 1
                     });
                 })

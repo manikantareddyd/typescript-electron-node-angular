@@ -5,6 +5,7 @@ import { HttpModule, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDialogModule} from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 import {
     AppComponent,
@@ -58,7 +59,8 @@ import 'hammerjs';
   providers: [
     HeroService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

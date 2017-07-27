@@ -16,7 +16,7 @@ AuthRouter.post('/login', AuthLocalController.loginUser);
 AuthRouter.post('/register', AuthLocalController.registerUser);
 AuthRouter.post('/updateUsername', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
-AuthRouter.get('/sendToken', AuthLocalController.sendToken)
+
 
 AuthRouter.get('/facebook', AuthFacebookController.authenticate);
 

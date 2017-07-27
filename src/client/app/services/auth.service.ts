@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -14,10 +15,10 @@ export class AuthService {
     private validateUrl = 'auth/validateToken';
     private updateUsernameUrl = 'auth/updateUsername';
     private facebookUrl = 'auth/facebook';
-    constructor(private http: Http, private router: Router ) { }
+    constructor(private http: Http, private router: Router, private cookieService: CookieService ) { }
 
     public logout(){
-        localStorage.clear();
+        this.cookieService.deleteAll();
         location.reload();
     }
     public login(username: string, password: string) {
@@ -41,7 +42,8 @@ export class AuthService {
     }
 
     public updateUsername(username: string){
-        let body = "username=" + username+"&id="+localStorage["id"];
+        let id = this.cookieService.get("id");
+        let body = "username=" + username+"&id="+id;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.updateUsernameUrl, body, options)
@@ -54,24 +56,14 @@ export class AuthService {
         let body = JSON.parse(res["_body"]);
         let success = body["success"];
         console.log(success);
-        if(success==1){
-            let token = body["token"];
-            let id = body["id"];
-            let username = body["username"];
-            localStorage.setItem("token", token);
-            localStorage.setItem("id", id);
-            localStorage.setItem("username", username);
-            console.log(res, success);
-        }
         return success;
     }
 
     public getAuthdetails(){
-        let username = localStorage['username'];
-        let token = localStorage["token"];
-        let id = localStorage["id"];
+
+        let username = this.cookieService.get('username');
+        let id = this.cookieService.get('id');
         return {
-            token: token,
             id: id,
             username: username
         };

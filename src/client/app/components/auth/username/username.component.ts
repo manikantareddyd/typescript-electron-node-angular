@@ -26,8 +26,4 @@ export class UsernameComponent implements OnInit {
     });
   }
 
-  public goToRegister(){
-    console.log("Register Clicked");
-    this.router.navigate(["register"]);
-  }
 }

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as express from 'express';
 import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
@@ -30,6 +31,7 @@ class App {
   // Configure Express middleware.
   private middleware(): void {
     this.app.use(logger('dev'));
+    this.app.use(cookieParser())
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(session({ secret: 'keyboard cat' }));

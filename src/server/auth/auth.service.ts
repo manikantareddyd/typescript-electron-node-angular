@@ -48,6 +48,23 @@ class AuthService {
         );
         return token;
     }
+
+    public authorizeToken(id: string, token: string){
+        let dtoken;
+        try {
+            dtoken = jwt.decode(token, { complete: true }) || {};
+            try{
+                return (dtoken.payload.id === id)? 1: 401
+            }
+            catch(err){
+                console.log("!",err)
+                return 401;
+            }
+        } catch (err) {
+            console.log("!!", err);
+            return 401;
+        }
+    }
 };
 
 export default new AuthService();

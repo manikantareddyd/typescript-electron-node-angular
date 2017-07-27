@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
 import Heroes from '../../../db/models/heroes';
-
+import AuthService from '../../../auth/auth.service';
 export class HeroController {
     getAll(req: Request, res: Response) {
+        let cookies = req.cookies
+        let response = AuthService.authorizeToken(cookies["id"], cookies["token"]);
+        if(response === 401){
+            res.status(401).send({});
+            return;
+        }
         return Heroes.find({}).exec().then(heroes => {
             res.status(200).send(heroes);
         });
