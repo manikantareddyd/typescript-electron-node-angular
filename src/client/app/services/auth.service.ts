@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 export class AuthService {
 
     private loginUrl = 'auth/login';
+    private logoutUrl = 'auth/logout';
     private registerUrl = 'auth/register';
     private validateUrl = 'auth/validateToken';
     private updateUsernameUrl = 'auth/updateUsername';
@@ -18,8 +19,11 @@ export class AuthService {
     constructor(private http: Http, private router: Router, private cookieService: CookieService ) { }
 
     public logout(){
-        this.cookieService.deleteAll();
-        location.reload();
+        return this.http.get(this.logoutUrl)
+            .toPromise()
+            .then(res=>{
+                location.reload()
+            })
     }
     public login(username: string, password: string) {
         let body = "username=" + username + "&password=" + password;

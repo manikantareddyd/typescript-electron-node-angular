@@ -1,7 +1,20 @@
 // load the things we need
 import * as mongoose from 'mongoose';
-import {IUser} from './models.d';
+import { IUser } from './models.d';
 import * as uuid from 'uuid/v4';
+
+let socialSchema = new mongoose.Schema({
+  id: { type: String, index: true, unique: true },
+  token: String,
+  displayName: String,
+  photos: [{
+    value: String
+  }],
+  emails: [{
+    value: String,
+    type: String
+  }]
+});
 
 // define the schema for our user model
 let userSchema = new mongoose.Schema({
@@ -15,24 +28,9 @@ let userSchema = new mongoose.Schema({
     givenName: String,
     middlename: String
   },
-  facebook: {
-    id: { type: String, index: true, unique: true },
-    token: String,
-    displayName: String,
-    photos: [String]
-  },
-  twitter: {
-    id: { type: String, index: true, unique: true },
-    token: String,
-    displayName: String,
-    photos: [String]
-  },
-  google: {
-    id: { type: String, index: true, unique: true },
-    token: String,
-    displayName: String,
-    photos: [String]
-  },
+  facebook: socialSchema,
+  twitter: socialSchema,
+  google: socialSchema,
   books: {
     owned: [String],
     current: [String],

@@ -14,12 +14,14 @@ let AuthRouter = express.Router();
 
 AuthRouter.post('/login', AuthLocalController.loginUser);
 AuthRouter.post('/register', AuthLocalController.registerUser);
+
 AuthRouter.post('/updateUsername', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
 
 
 AuthRouter.get('/facebook', AuthFacebookController.authenticate);
-
 AuthRouter.get('/facebook/callback', AuthFacebookController.callback);
 
+
+AuthRouter.get('/logout', AuthController.logoutUser);
 export default AuthRouter;

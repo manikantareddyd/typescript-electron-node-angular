@@ -11,11 +11,13 @@ export class AuthFacebookController {
     }
     public callback(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"]);        
-        passport.authorize('facebook', function (err, user, info) {
-            if(info === "linked elsewhere"){
-                return res.send({
-                    success: 3
-                })
+        passport.authorize('facebook', {failureFlash: true},function (err, user, info) {
+            if(err){
+                res.redirect("/");
+                return;
+            }
+            if(info === 3){
+                return res.redirect('/');
             }
 
             res.cookie("id", user._id);
@@ -23,13 +25,8 @@ export class AuthFacebookController {
                 res.cookie("username", user.username);
             }
             res.cookie("token", AuthService.getToken(user._id), {httpOnly: true});      
-            // res.send({
-            //     id: user._id,
-            //     username: (user.username) ? user.username : null,
-            //     token: AuthService.getToken(user.id),
-            //     success: 1
-            // });
             res.redirect("/");
+            
         })(req, res, next);
     }
 }

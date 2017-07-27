@@ -3,6 +3,7 @@ import * as uuid from 'uuid/v4';
 import * as jwt from 'jsonwebtoken';
 import AuthSecrets from './auth.secrets';
 import Users from '../db/models/users'
+import { Request, Response } from 'express';
 class AuthService {
     public validatePassword(user, password) {
         let salt = user.salt;
@@ -49,19 +50,17 @@ class AuthService {
         return token;
     }
 
-    public authorizeToken(id: string, token: string){
+    public authorize(cookies){
         let dtoken;
         try {
+            let token = cookies["token"];
+            let id = cookies["id"];
             dtoken = jwt.decode(token, { complete: true }) || {};
-            try{
-                return (dtoken.payload.id === id)? 1: 401
-            }
-            catch(err){
-                console.log("!",err)
-                return 401;
-            }
+            if(dtoken.payload.id===id)
+                return 1
+            else
+                return 401
         } catch (err) {
-            console.log("!!", err);
             return 401;
         }
     }

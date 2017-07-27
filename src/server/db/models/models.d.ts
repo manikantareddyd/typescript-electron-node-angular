@@ -9,7 +9,13 @@ interface ISocialProfile {
   id: string,
   token: string,
   displayName: string,
-  photos: string[]
+  photos: [{
+      value: string
+  }],
+  emails:[{
+    value: string,
+    type: string
+  }]
 }
 
 export interface IUser extends mongoose.Document {
