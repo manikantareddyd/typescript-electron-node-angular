@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services';
 import { Router } from '@angular/router';
+import { User } from '../../../classes';
 @Component({
   selector: 'my-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public username: string;
-  public password: string;
+  public user = new User();
   public message: string;
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(){
-    console.log(this.username, this.password);
-    this.authService.login(this.username, this.password)
+    console.log(this.user.username, this.user.password);
+    this.authService.login(this.user.username, this.user.password)
     .then(success=>{
       if(success)
         location.reload();

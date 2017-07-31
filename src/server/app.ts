@@ -8,7 +8,7 @@ import * as passport from 'passport';
 import * as mongoose from 'mongoose';
 import passportConfig from './auth/passport/passport.config';
 
-import Heroes from './db/models/heroes';
+import { Heroes } from './db/models';
 
 import AppRouter from './app.router';
 // Creates and configures an ExpressJS web server.

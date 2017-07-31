@@ -6,6 +6,11 @@
         "app_secret": "49b9e429e89438d063f1a7a6525d38aa",
         "callback": "http://localhost:3000/auth/facebook/callback"
     },
+    "twitter": {
+        "consumer_key": "wYNOleH6CUmYVbFniW5GFwSvC",
+        "consumer_secret": "8F0KbBW88haHHEju96PieFQbZDwpHiuA3to41JKWmnLWMIPONw",
+        "callback": "http://localhost:3000/auth/twitter/callback"
+    },
     "jwt":{
         "secret":"HakunaMatata"
     }

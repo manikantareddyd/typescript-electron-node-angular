@@ -7,4 +7,5 @@ let heroSchema = new mongoose.Schema({
   name: String
 });
 
-export default mongoose.model<IHero>("heroes", heroSchema);
+let Heroes = mongoose.model<IHero>("heroes", heroSchema);
+export default Heroes;

@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import * as uuid from 'uuid/v4';
 import * as jwt from 'jsonwebtoken';
 import AuthSecrets from './auth.secrets';
-import Users from '../db/models/users'
+import { Users } from '../db/models'
 import { Request, Response } from 'express';
 class AuthService {
     public validatePassword(user, password) {
@@ -18,7 +18,7 @@ class AuthService {
         let salt = this.genSalt();
         let hashpass = this.hashPassword(password, salt);
         return {
-            _id: uuid(),
+            id: uuid(),
             username: username,
             salt: salt,
             hashpass: hashpass

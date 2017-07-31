@@ -12,17 +12,15 @@ interface ISocialProfile {
   photos: [{
       value: string
   }],
-  emails:[{
-    value: string,
-    type: string
+  emails: [{
+    value: string
   }]
 }
 
 export interface IUser extends mongoose.Document {
-  _id: string,
+  id: string,
   username: string,
   password: string,
-  primaryEmail: string,
   name: {
     familyName: string,
     givenName: string,

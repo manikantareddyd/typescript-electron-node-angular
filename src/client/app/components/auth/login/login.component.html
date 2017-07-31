@@ -1,23 +1,33 @@
 <div class="container">
 
-    <form class="form-signin" (ngSubmit)="onSubmit()">
+    <form class="form-signin" name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="username" class="sr-only">Username</label>
-        <input type="text" name="username" class="form-control" [(ngModel)]="username" placeholder="Username" required autofocus>
+        <input type="text" id="username" name="username" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+        <div *ngIf="username.errors && (username.dirty || username.touched)" [hidden]="!username.errors.required">
+              Username is required
+        </div>
         <label for="password" class="sr-only">Password</label>
-        <input type="password" name="password" class="form-control" [(ngModel)]="password" placeholder="Password" required>
+        <input type="password" id="password" name="password" #password="ngModel" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+        <div *ngIf="password.errors && (password.dirty || password.touched)" [hidden]="!password.errors.required">
+              Password is required
+        </div>
         <p>{{message}}</p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid" >Sign in</button>
     </form>
-    <form class="form-signin">
+    <div class="form-signin">
         <button value="Register" class="btn btn-lg btn-success btn-block" (click)="goToRegister()">New User?</button>
-    </form>
-    <form class="form-signin">
-        <a href="auth/facebook?id=" class="btn btn-lg btn-block btn-social btn-facebook" >
+    </div>
+    <div class="form-signin">
+        <a href="auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook" >
             <span class="fa fa-facebook"></span>
             Continue with Facebook
         </a>
-    </form>
+        <a href="auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter" >
+            <span class="fa fa-twitter"></span>
+            Continue with Twitter
+        </a>
+    </div>
 
 
 </div>

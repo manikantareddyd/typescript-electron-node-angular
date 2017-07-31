@@ -1,17 +1,24 @@
-interface Facebook {
-    token_url: string,
-    auth_url: string,
+export interface Facebook {
+    token_url: string;
+    auth_url: string;
     app_id: string;
     app_secret: string;
     callback: string;
 }
 
-interface Jwt {
+export interface Twitter {
+    consumer_key: string;
+    consumer_secret: string;
+    callback: string;
+}
+
+export interface Jwt {
     secret: string;
 }
 
-interface AuthSecrets {
+export interface AuthSecrets {
     facebook: Facebook;
+    twitter: Twitter;
     jwt: Jwt;
 }
 

@@ -1,8 +1,10 @@
 import * as passport from 'passport';
 import facebookStrategy from './facebook.strategy';
+import twitterStrategy from './twitter.strategy';
 function configure_passport(): void {
 
     passport.use(facebookStrategy);
+    passport.use(twitterStrategy);
 
     passport.serializeUser<any, any>((user, done) => {
         console.log("Serializing")

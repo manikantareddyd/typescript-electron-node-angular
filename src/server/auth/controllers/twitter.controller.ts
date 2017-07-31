@@ -2,16 +2,16 @@ import { Request, Response, NextFunction } from 'express';
 import { Users } from '../../db/models';
 import AuthService from '../auth.service';
 import * as passport from 'passport';
-export class AuthFacebookController {
+export class AuthTwitterController {
 
     public authenticate(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"], req.query["id"], "authen");
         req.headers["id"] = req.query["id"];
-        passport.authenticate('facebook', { scope: ['email'] })(req, res, next);
+        passport.authenticate('twitter', { scope: ['email'] })(req, res, next);
     }
     public callback(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"]);        
-        passport.authorize('facebook', {failureFlash: true},function (err, user, info) {
+        passport.authorize('twitter', {failureFlash: true},function (err, user, info) {
             if(err){
                 res.redirect("/");
                 return;
@@ -31,4 +31,4 @@ export class AuthFacebookController {
     }
 }
 
-export default new AuthFacebookController();
+export default new AuthTwitterController();
