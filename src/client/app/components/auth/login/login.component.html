@@ -1,29 +1,54 @@
 <div class="container">
-
+    
     <form class="form-signin" name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
-        <div *ngIf="username.errors && (username.dirty || username.touched)" [hidden]="!username.errors.required">
-              Username is required
+        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+        <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
+            <div [hidden]="!username.errors.required">
+                Username is required!
+            </div>
+            <div [hidden]="!username.errors.pattern">
+                A Username can
+                <span></span>
+                <ul>
+                    <li>Contain only A-Z a-z 0-9 _ -</li>
+                    <li>Have No Spaces</li>
+                    <li>Begin only with A-Z a-z</li>
+                </ul>
+            </div>
+            <div [hidden]="!username.errors.minlength">
+                Username should be of atleast 4 characters in length!
+            </div>
+            <div [hidden]="!username.errors.maxlength">
+                Username should be a maximum of 32 characters in length!
+            </div>
         </div>
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" #password="ngModel" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
-        <div *ngIf="password.errors && (password.dirty || password.touched)" [hidden]="!password.errors.required">
-              Password is required
+        <input type="password" id="password" name="password" minlength="8" maxlength="64" #password="ngModel" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+        <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+            <div [hidden]="!password.errors.required">
+                Password is required!
+            </div>
+            <div [hidden]="!password.errors.minlength">
+                Password should be of atleast 8 characters in length!
+            </div>
+            <div [hidden]="!password.errors.maxlength">
+                Password should be a maximum of 64 characters in length!
+            </div>
         </div>
         <p>{{message}}</p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid" >Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
     </form>
     <div class="form-signin">
         <button value="Register" class="btn btn-lg btn-success btn-block" (click)="goToRegister()">New User?</button>
     </div>
     <div class="form-signin">
-        <a href="auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook" >
+        <a href="auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook">
             <span class="fa fa-facebook"></span>
             Continue with Facebook
         </a>
-        <a href="auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter" >
+        <a href="auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter">
             <span class="fa fa-twitter"></span>
             Continue with Twitter
         </a>
