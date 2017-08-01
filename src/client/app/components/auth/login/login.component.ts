@@ -10,6 +10,7 @@ import { User } from '../../../classes';
 export class LoginComponent implements OnInit {
   public user = new User();
   public message: string;
+  public success=1;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     console.log(this.user.username, this.user.password);
     this.authService.login(this.user.username, this.user.password)
     .then(success=>{
+      this.success = success;
       if(success)
         location.reload();
       else
@@ -37,12 +39,15 @@ export class LoginComponent implements OnInit {
     this.authService.facebook(null)
     .then(success=>{
       if(success==3){
+        this.success=0;
         this.message = "Facebook account already linked with someone else!"
       }
       else if(success==1){
+        this.success=1;
         location.reload();
       }
       else{
+        this.success=0;
         this.message ="hey ram"
       }
       

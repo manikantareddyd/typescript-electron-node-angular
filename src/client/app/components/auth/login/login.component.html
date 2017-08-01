@@ -37,7 +37,9 @@
                 Password should be a maximum of 64 characters in length!
             </div>
         </div>
-        <p>{{message}}</p>
+        <div *ngIf="!success" class="alert alert-danger">
+            {{message}}
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
     </form>
     <div class="form-signin">

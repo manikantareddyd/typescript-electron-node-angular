@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services';
 import { Router } from '@angular/router';
+import { User } from '../../../classes';
 @Component({
   selector: 'my-username',
   templateUrl: './username.component.html',
   styleUrls: ['./username.component.css']
 })
 export class UsernameComponent implements OnInit {
-  public username: string;
+  public user = new User();
   public message: string;
+  public success=1;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -16,9 +18,10 @@ export class UsernameComponent implements OnInit {
   }
 
   public onSubmit(){
-    console.log(this.username);
-    this.authService.updateUsername(this.username)
+    console.log(this.user.username);
+    this.authService.updateUsername(this.user.username)
     .then(success => {
+      this.success = success;
       if(success)
         location.reload();
       else

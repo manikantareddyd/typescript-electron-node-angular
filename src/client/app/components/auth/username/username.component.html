@@ -2,8 +2,28 @@
     <form class="form-signin" (ngSubmit)="onSubmit()">
         <h2 class="form-signin-heading">Choose a Username!</h2>
         <label for="username" class="sr-only">Username</label>
-        <input type="text" name="username" class="form-control" [(ngModel)]="username" placeholder="Username" required autofocus>
-        <p>{{message}}</p>
+        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+        <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
+            <div [hidden]="!username.errors.required">
+                Username is required!
+            </div>
+            <div [hidden]="!username.errors.pattern">
+                A Username can
+                <span></span>
+                <ul>
+                    <li>Contain only A-Z a-z 0-9 _ -</li>
+                    <li>Have No Spaces</li>
+                    <li>Begin only with A-Z a-z</li>
+                </ul>
+            </div>
+            <div [hidden]="!username.errors.minlength">
+                Username should be of atleast 4 characters in length!
+            </div>
+            <div [hidden]="!username.errors.maxlength">
+                Username should be a maximum of 32 characters in length!
+            </div>
+        </div>
+        <div *ngIf="!success" class="alert alert-danger">{{message}}</div>
         <button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
     </form>
 </div>
