@@ -11,7 +11,7 @@ export class AuthTwitterController {
     }
     public callback(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"]);
-        passport.authorize('twitter', { failureFlash: true }, function (err, user, info) {
+        passport.authorize('twitter', function (err, user, info) {
             if (err) {
                 res.redirect("/");
                 return;

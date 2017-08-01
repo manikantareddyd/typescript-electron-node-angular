@@ -11,7 +11,7 @@ export class AuthFacebookController {
     }
     public callback(req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"]);
-        passport.authorize('facebook', { failureFlash: true }, function (err, user, info) {
+        passport.authorize('facebook', function (err, user, info) {
             if (err) {
                 res.redirect("/");
                 return;
