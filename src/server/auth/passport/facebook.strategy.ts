@@ -97,13 +97,13 @@ export default new FacebookStrategy({
                             // This facebook id is not registered before
                             // We need to link these two.
                             console.log("linking both accounts")
-                            Users.findOneAndUpdate({id: id}, {
+                            Users.findOneAndUpdate({ id: id }, {
                                 'facebook': {
                                     'id': profile.id,
                                     'token': token,
                                     'displayName': profile.displayName,
                                     'photos': profile.photos,
-                                    'emails':profile.emails
+                                    'emails': profile.emails
                                 }
                             }, function (err, user) {
                                 if (err) {

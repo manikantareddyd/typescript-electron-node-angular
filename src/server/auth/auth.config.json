@@ -11,7 +11,7 @@
         "consumer_secret": "8F0KbBW88haHHEju96PieFQbZDwpHiuA3to41JKWmnLWMIPONw",
         "callback": "http://localhost:3000/auth/twitter/callback"
     },
-    "jwt":{
-        "secret":"HakunaMatata"
+    "jwt": {
+        "secret": "HakunaMatata"
     }
 }

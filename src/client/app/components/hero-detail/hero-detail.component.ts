@@ -6,25 +6,25 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { Hero } from '../../classes';
 import { HeroService } from '../../services';
 @Component({
-  selector: 'hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css']
+    selector: 'hero-detail',
+    templateUrl: './hero-detail.component.html',
+    styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  public hero: Hero;
+    public hero: Hero;
 
-  constructor(
-    private heroService: HeroService,
-    private route: ActivatedRoute,
-    private location: Location,
-    @Inject(MD_DIALOG_DATA) public data: any
-  ) { }
+    constructor(
+        private heroService: HeroService,
+        private route: ActivatedRoute,
+        private location: Location,
+        @Inject(MD_DIALOG_DATA) public data: any
+    ) { }
 
-  ngOnInit(): void {
-    this.hero = this.data;
-  }
+    ngOnInit(): void {
+        this.hero = this.data;
+    }
 
-  goBack(): void {
-    this.location.back();
-  }
+    goBack(): void {
+        this.location.back();
+    }
 }

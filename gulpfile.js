@@ -7,20 +7,20 @@ let CLIENT_FILES = ['src/client/**/*'];
 let serverTsProject = ts.createProject('./src/server/tsconfig.json');
 
 gulp.task('build_server', () => {
-  return serverTsProject.src()
-    .pipe(serverTsProject())
-    .js
-    .pipe(gulp.dest('dist/server'));
+    return serverTsProject.src()
+        .pipe(serverTsProject())
+        .js
+        .pipe(gulp.dest('dist/server'));
 });
 
 gulp.task('move_server_data', () => {
-  return gulp.src(SERVER_FILES)
-    .pipe(gulp.dest('dist/server'));
+    return gulp.src(SERVER_FILES)
+        .pipe(gulp.dest('dist/server'));
 });
 
 var tasks = [
-  'build_server',
-  'move_server_data'
+    'build_server',
+    'move_server_data'
 ];
 
 gulp.task('default', tasks);

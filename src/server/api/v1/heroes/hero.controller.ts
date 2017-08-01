@@ -4,7 +4,7 @@ import AuthService from '../../../auth/auth.service';
 export class HeroController {
     getAll(req: Request, res: Response) {
         let response = AuthService.authorize(req.cookies);
-        if(response === 401){
+        if (response === 401) {
             res.status(401).send({});
             return;
         }
@@ -15,7 +15,7 @@ export class HeroController {
 
     getOne(req: Request, res: Response) {
         let response = AuthService.authorize(req.cookies);
-        if(response === 401){
+        if (response === 401) {
             res.status(401).send({});
             return;
         }

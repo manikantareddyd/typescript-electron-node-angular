@@ -1,5 +1,5 @@
 import { MaterialModule } from './material.module';
 
-export { 
+export {
     MaterialModule
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 export class AuthController {
-    public logoutUser(req: Request, res: Response){
+    public logoutUser(req: Request, res: Response) {
         res.clearCookie("token");
         res.clearCookie("id");
         res.clearCookie("username");

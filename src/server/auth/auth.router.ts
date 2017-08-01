@@ -8,10 +8,10 @@ import {
     AuthLocalController,
     AuthTwitterController
 } from './controllers'
-import * as expressJwt  from 'express-jwt';
+import * as expressJwt from 'express-jwt';
 import AuthSecrets from './auth.secrets';
 import AuthService from './auth.service';
-let authenticate = expressJwt({secret: AuthSecrets.jwt.secret})
+let authenticate = expressJwt({ secret: AuthSecrets.jwt.secret })
 
 let AuthRouter = express.Router();
 

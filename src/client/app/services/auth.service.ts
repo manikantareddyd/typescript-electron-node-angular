@@ -16,12 +16,12 @@ export class AuthService {
     private validateUrl = 'auth/validateToken';
     private updateUsernameUrl = 'auth/updateUsername';
     private facebookUrl = 'auth/facebook';
-    constructor(private http: Http, private router: Router, private cookieService: CookieService ) { }
+    constructor(private http: Http, private router: Router, private cookieService: CookieService) { }
 
-    public logout(){
+    public logout() {
         return this.http.get(this.logoutUrl)
             .toPromise()
-            .then(res=>{
+            .then(res => {
                 location.reload()
             })
     }
@@ -35,7 +35,7 @@ export class AuthService {
             .catch();
     }
 
-    public register(username: string, password: string){
+    public register(username: string, password: string) {
         let body = "username=" + username + "&password=" + password;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
@@ -45,9 +45,9 @@ export class AuthService {
             .catch();
     }
 
-    public updateUsername(username: string){
+    public updateUsername(username: string) {
         let id = this.cookieService.get("id");
-        let body = "username=" + username+"&id="+id;
+        let body = "username=" + username + "&id=" + id;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.updateUsernameUrl, body, options)
@@ -63,7 +63,7 @@ export class AuthService {
         return success;
     }
 
-    public getAuthdetails(){
+    public getAuthdetails() {
 
         let username = this.cookieService.get('username');
         let id = this.cookieService.get('id');
@@ -87,10 +87,10 @@ export class AuthService {
         return Observable.throw(errMsg);
     }
 
-    public facebook(id: string){
+    public facebook(id: string) {
         let headers = new Headers({ 'id': id, 'Access-Control-Allow-Origin': '*' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.facebookUrl+"?id="+id, options)
+        return this.http.get(this.facebookUrl + "?id=" + id, options)
             .toPromise()
             .then(this.saveToken)
             .catch(this.handleError);

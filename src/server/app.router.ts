@@ -13,11 +13,11 @@ AppRouter.use('/api/v1/heroes', HeroRouter);
 AppRouter.use('/auth', AuthRouter);
 
 AppRouter.get('/', (req, res, next) => {
-  res.render("index");
+    res.render("index");
 });
 
 AppRouter.get('*', (req, res, next) => {
-  res.redirect("/");
+    res.redirect("/");
 });
 
 export default AppRouter;

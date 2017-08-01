@@ -26,7 +26,7 @@ export class AuthLocalController {
                     let token = AuthService.getToken(user.id);
                     res.cookie("id", user.id)
                     res.cookie("username", user.username);
-                    res.cookie("token", token, {httpOnly: true});
+                    res.cookie("token", token, { httpOnly: true });
                     res.send({
                         success: 1
                     });
@@ -63,8 +63,8 @@ export class AuthLocalController {
                 console.log("New User");
                 let secrets = AuthService.genUser(username, password);
                 let newuser = new Users(secrets);
-                newuser.save(function(err, dbuser){
-                    if(err){
+                newuser.save(function (err, dbuser) {
+                    if (err) {
                         console.log("db error 2", err);
                         res.send({
                             success: 0
@@ -80,16 +80,16 @@ export class AuthLocalController {
                         success: 1
                     });
                 });
-                    
+
             }
         })
     }
 
-    
+
 
     updateUsername(req: Request, res: Response) {
         let response = AuthService.authorize(req.cookies);
-        if(response === 401){
+        if (response === 401) {
             res.status(401).send({});
             return;
         }
@@ -107,7 +107,7 @@ export class AuthLocalController {
                     success: 0
                 })
             } else {
-                Users.findOneAndUpdate({id: id}, { username: username }, function (err, user) {
+                Users.findOneAndUpdate({ id: id }, { username: username }, function (err, user) {
                     if (err) {
                         return res.send({
                             success: 0

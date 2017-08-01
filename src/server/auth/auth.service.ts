@@ -11,10 +11,10 @@ class AuthService {
         return (hashpass === user.hashpass);
     }
 
-    public genId(){
+    public genId() {
         return uuid();
     }
-    public genUser(username: string, password: string){
+    public genUser(username: string, password: string) {
         let salt = this.genSalt();
         let hashpass = this.hashPassword(password, salt);
         return {
@@ -39,7 +39,7 @@ class AuthService {
         return salt;
     }
 
-    public getToken(id: string){
+    public getToken(id: string) {
         let payload = {
             id: id,
         };
@@ -50,13 +50,13 @@ class AuthService {
         return token;
     }
 
-    public authorize(cookies){
+    public authorize(cookies) {
         let dtoken;
         try {
             let token = cookies["token"];
             let id = cookies["id"];
             dtoken = jwt.decode(token, { complete: true }) || {};
-            if(dtoken.payload.id===id)
+            if (dtoken.payload.id === id)
                 return 1
             else
                 return 401
