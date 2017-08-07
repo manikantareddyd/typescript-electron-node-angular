@@ -4,9 +4,8 @@ import { Request, Response } from 'express';
 
 import {
     AuthController,
-    AuthFacebookController,
     AuthLocalController,
-    AuthTwitterController
+    AuthSocialController
 } from './controllers'
 import * as expressJwt from 'express-jwt';
 import AuthSecrets from './auth.secrets';
@@ -22,11 +21,11 @@ AuthRouter.post('/updateUsername', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
 
 
-AuthRouter.get('/facebook', AuthFacebookController.authenticate);
-AuthRouter.get('/facebook/callback', AuthFacebookController.callback);
+AuthRouter.get('/facebook', AuthSocialController.facebook);
+AuthRouter.get('/facebook/callback', AuthSocialController.facebook_callback);
 
-AuthRouter.get('/twitter', AuthTwitterController.authenticate);
-AuthRouter.get('/twitter/callback', AuthTwitterController.callback);
+AuthRouter.get('/twitter', AuthSocialController.twitter);
+AuthRouter.get('/twitter/callback', AuthSocialController.twitter_callback);
 
 AuthRouter.get('/logout', AuthController.logoutUser);
 export default AuthRouter;

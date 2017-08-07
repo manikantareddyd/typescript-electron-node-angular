@@ -25,59 +25,56 @@ export default new TwitterStrategy({
             if (!id) {
                 // New User
                 console.log("Unlogged in User");
-                Users.findOne({ 'twitter.id': profile.id }, function (err, user) {
-                    if (err) {
-                        console.log(err);
-                        return done(err);
-                    }
-
-                    if (user) {
-                        console.log("Twitter registered earlier");
-                        // if there is a user id already but no token (user was linked at one point and then removed)
-                        if (!user.twitter.token) {
-                            user.twitter.token = token;
-                            user.twitter.displayName = profile.displayName;
-                            user.twitter.photos = profile.photos;
-                            user.twitter.emails = profile.emails;
-                            user.save(function (err) {
-                                if (err) {
-                                    console.log(err);
-                                    return done(err);
-                                }
-
-                                return done(null, user);
-                            });
-                        }
-
-                        return done(null, user); // user found, return that user
-                    } else {
-                        // if there is no user, create them
-                        console.log("totally new user");
-                        let newUser = new Users();
-                        console.log(newUser);
-                        console.log("***************");
-                        console.log(profile);
-                        newUser.id = AuthService.genId();
-                        newUser.twitter.id = profile.id;
-                        newUser.twitter.token = token;
-                        newUser.twitter.displayName = profile.displayName;
-                        newUser.twitter.photos = profile.photos;
-                        newUser.twitter.emails = profile.emails;
-                        newUser.save(function (err) {
-                            if (err) {
-                                console.log(err);
-                                return done(err);
+                Users.findOne({ 'twitter.id': profile.id })
+                    .then(user => {
+                        if (user) {
+                            console.log("Twitter registered earlier");
+                            // if there is a user id already but no token (user was linked at one point and then removed)
+                            if (!user.twitter.token) {
+                                user.twitter.token = token;
+                                user.twitter.displayName = profile.displayName;
+                                user.twitter.photos = profile.photos;
+                                user.twitter.emails = profile.emails;
+                                user.save()
+                                    .then(user => {
+                                        return done(null, user);
+                                    }).catch(err => {
+                                        console.log(err);
+                                        return (err);
+                                    })
                             }
 
-                            return done(null, newUser);
-                        });
-                    }
-                });
+                            return done(null, user); // user found, return that user
+                        } else {
+                            // if there is no user, create them
+                            console.log("totally new user");
+                            let newUser = new Users();
+                            console.log(newUser);
+                            console.log("***************");
+                            console.log(profile);
+                            newUser.id = AuthService.genId();
+                            newUser.twitter.id = profile.id;
+                            newUser.twitter.token = token;
+                            newUser.twitter.displayName = profile.displayName;
+                            newUser.twitter.photos = profile.photos;
+                            newUser.twitter.emails = profile.emails;
+                            newUser.save()
+                                .then(newUser => {
+                                    return done(null, newUser);
+                                }).catch(err => {
+                                    console.log(err)
+                                    return done(err);
+                                })
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        return done(err);
+                    })
 
             } else {
                 console.log("User is currently logged in")
-                Users.findOne({ 'twitter.id': profile.id },
-                    function (err, user) {
+                Users.findOne({ 'twitter.id': profile.id })
+                    .then(user => {
                         if (user) {
                             if (user.id != id) {
                                 console.log("twitter registered with someone else");
@@ -103,17 +100,17 @@ export default new TwitterStrategy({
                                     'photos': profile.photos,
                                     'emails': profile.emails
                                 }
-                            }, function (err, user) {
-                                if (err) {
-                                    console.log(err);
-                                    return done(err);
-                                }
-
+                            }).then(user => {
                                 return done(null, user);
-                            });
+                            }).catch(err => {
+                                console.log(err);
+                                return (err);
+                            })
                         }
+                    }).catch(err => {
+                        console.log(err);
+                        return done(err);
                     })
-
             }
         });
 

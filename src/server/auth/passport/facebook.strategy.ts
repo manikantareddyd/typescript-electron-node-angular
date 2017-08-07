@@ -17,69 +17,65 @@ export default new FacebookStrategy({
     function (req: Request, token, refreshToken, profile, done) {
         // asynchronous
         process.nextTick(function () {
-            let id;
-            try {
-                id = req.cookies["id"];
-            } catch (err) {
-                id = null;
-            }
+            let id = req.cookies["id"] ? req.cookies["id"] : null;
+            
             // check if the user is already logged in
             if (!id) {
                 // New User
                 console.log("Unlogged in User");
-                Users.findOne({ 'facebook.id': profile.id }, function (err, user) {
-                    if (err) {
-                        console.log(err);
-                        return done(err);
-                    }
-
-                    if (user) {
-                        console.log("Facebook registered earlier");
-                        // if there is a user id already but no token (user was linked at one point and then removed)
-                        if (!user.facebook.token) {
-                            user.facebook.token = token;
-                            user.facebook.displayName = profile.displayName;
-                            user.facebook.photos = profile.photos;
-                            user.facebook.emails = profile.emails;
-                            user.save(function (err) {
-                                if (err) {
-                                    console.log(err);
-                                    return done(err);
-                                }
-
-                                return done(null, user);
-                            });
-                        }
-
-                        return done(null, user); // user found, return that user
-                    } else {
-                        // if there is no user, create them
-                        console.log("totally new user");
-                        let newUser = new Users();
-                        console.log(newUser);
-                        console.log("***************");
-                        console.log(profile);
-                        newUser.id = AuthService.genId();
-                        newUser.facebook.id = profile.id;
-                        newUser.facebook.token = token;
-                        newUser.facebook.displayName = profile.displayName;
-                        newUser.facebook.photos = profile.photos;
-                        newUser.facebook.emails = profile.emails;
-                        newUser.save(function (err) {
-                            if (err) {
-                                console.log(err);
-                                return done(err);
+                Users.findOne({ 'facebook.id': profile.id })
+                    .then(user => {
+                        if (user) {
+                            console.log("Facebook registered earlier");
+                            // if there is a user id already but no token 
+                            // user was linked at one point and then removed
+                            if (!user.facebook.token) {
+                                user.facebook.token = token;
+                                user.facebook.displayName = profile.displayName;
+                                user.facebook.photos = profile.photos;
+                                user.facebook.emails = profile.emails;
+                                user.save()
+                                    .then(user => {
+                                        return done(null, user);
+                                    }).catch(err => {
+                                        console.log(err);
+                                        return done(err);
+                                    })
                             }
 
-                            return done(null, newUser);
-                        });
-                    }
-                });
-
+                            return done(null, user); // user found, return that user
+                        } else {
+                            // if there is no user, create them
+                            console.log("totally new user");
+                            let newUser = new Users();
+                            console.log(newUser);
+                            console.log("***************");
+                            console.log(profile);
+                            newUser.id = AuthService.genId();
+                            newUser.facebook.id = profile.id;
+                            newUser.facebook.token = token;
+                            newUser.facebook.displayName = profile.displayName;
+                            newUser.facebook.photos = profile.photos;
+                            newUser.facebook.emails = profile.emails;
+                            newUser.save()
+                                .then(newUser => {
+                                    return done(null, newUser);
+                                }).catch(err => {
+                                    console.log(err);
+                                    return done(err);
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        if (err) {
+                            console.log(err);
+                            return done(err);
+                        }
+                    })
             } else {
                 console.log("User is currently logged in")
-                Users.findOne({ 'facebook.id': profile.id },
-                    function (err, user) {
+                Users.findOne({ 'facebook.id': profile.id })
+                    .then(user => {
                         if (user) {
                             if (user.id != id) {
                                 console.log("fb registered with someone else");
@@ -97,24 +93,30 @@ export default new FacebookStrategy({
                             // This facebook id is not registered before
                             // We need to link these two.
                             console.log("linking both accounts")
-                            Users.findOneAndUpdate({ id: id }, {
-                                'facebook': {
-                                    'id': profile.id,
-                                    'token': token,
-                                    'displayName': profile.displayName,
-                                    'photos': profile.photos,
-                                    'emails': profile.emails
-                                }
-                            }, function (err, user) {
-                                if (err) {
+                            Users.findOneAndUpdate({
+                                id: id
+                            },
+                                {
+                                    'facebook': {
+                                        'id': profile.id,
+                                        'token': token,
+                                        'displayName': profile.displayName,
+                                        'photos': profile.photos,
+                                        'emails': profile.emails
+                                    }
+                                }).then(user => {
+                                    return done(null, user);
+                                }).catch(err => {
                                     console.log(err);
                                     return done(err);
-                                }
-
-                                return done(null, user);
-                            });
+                                })
                         }
-                    })
+                    }).catch(err => {
+                        if (err) {
+                            console.log(err);
+                            return done(err);
+                        }
+                    });
 
             }
         });

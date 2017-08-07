@@ -6,6 +6,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
 import * as mongoose from 'mongoose';
+import * as bluebird from 'bluebird';
 import passportConfig from './auth/passport/passport.config';
 
 import { Heroes } from './db/models';
@@ -21,11 +22,15 @@ class App {
     constructor() {
         this.app = express();
         mongoose.connect('mongodb://localhost:27017/sample');
+        (<any>mongoose).Promise = Promise;
         this.middleware();
         this.routes();
         Heroes.count({}, function (err, c) {
             console.log("Heroes Count:\t", c);
         });
+        Heroes.count({}).then(h => {
+            console.log("halala", h);
+        })
     }
 
     // Configure Express middleware.

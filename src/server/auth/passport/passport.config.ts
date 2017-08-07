@@ -12,7 +12,6 @@ function configure_passport(): void {
     });
 
     passport.deserializeUser((id: string, done) => {
-        //Users.findById(id).then((user: Users)=>done(null, user)).catch(err=>{done(err, null)});
         console.log("Deserializing");
         let user = { id: id }
         return done(null, user)
