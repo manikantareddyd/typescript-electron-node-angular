@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import { Users } from '../../db/models';
 import AuthService from '../auth.service';
 import * as passport from 'passport';
-class AuthSocialService {
 
+
+class AuthSocialController {
+    
     public authenticate(social, req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"], req.query["id"], "authen");
         req.headers["id"] = req.query["id"];
@@ -29,31 +31,6 @@ class AuthSocialService {
 
         })(req, res, next);
     }
-}
-
-var authSocialService = new AuthSocialService();
-
-class AuthSocialController {
-    public authSocialService;
-    constructor() {
-        authSocialService = new AuthSocialService();
-    }
-    public facebook(req: Request, res: Response, next: NextFunction) {
-        authSocialService.authenticate('facebook', req, res, next);
-    }
-
-    public facebook_callback(req: Request, res: Response, next: NextFunction) {
-        authSocialService.callback('facebook', req, res, next);
-    }
-
-    public twitter(req: Request, res: Response, next: NextFunction) {
-        authSocialService.authenticate('twitter', req, res, next);
-    }
-
-    public twitter_callback(req: Request, res: Response, next: NextFunction) {
-        authSocialService.callback('twitter', req, res, next);
-    }
-    
 }
 
 
