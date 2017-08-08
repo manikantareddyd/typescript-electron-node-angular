@@ -1,8 +1,8 @@
 import * as passport from 'passport';
 import * as FacebookStrategy from 'passport-facebook';
-import AuthSecrets from '../auth.secrets';
-import { Users } from '../../db/models';
-import AuthService from '../auth.service';
+import AuthSecrets from '../../auth.secrets';
+import { Users } from '../../../db/models';
+import AuthService from '../../auth.service';
 import * as fs from 'fs';
 import { Request, Response } from 'express';
 export default new FacebookStrategy({

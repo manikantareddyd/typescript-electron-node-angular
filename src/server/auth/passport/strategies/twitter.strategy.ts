@@ -1,8 +1,8 @@
 import * as passport from 'passport';
 import * as TwitterStrategy from 'passport-twitter';
-import AuthSecrets from '../auth.secrets';
-import { Users } from '../../db/models';
-import AuthService from '../auth.service';
+import AuthSecrets from '../../auth.secrets';
+import { Users } from '../../../db/models';
+import AuthService from '../../auth.service';
 import { Request, Response } from 'express';
 
 export default new TwitterStrategy({
