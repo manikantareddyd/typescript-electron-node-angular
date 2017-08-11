@@ -10,7 +10,7 @@ function do_all {
 }
 
 function do_server {
-    rm -r dist/server
+    
     gulp
 }
 

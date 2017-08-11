@@ -121,6 +121,10 @@ export class AuthLocalController {
                 });
             });
     }
+    
+    forgotPassword(req: Request, res: Response) {
+        
+    }
 }
 
 export default new AuthLocalController();

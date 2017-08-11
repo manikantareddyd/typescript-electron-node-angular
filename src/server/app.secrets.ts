@@ -22,4 +22,18 @@ export interface AuthSecrets {
     jwt: Jwt;
 }
 
-export default <AuthSecrets>require("./auth.config.json");
+interface EmailSecrets {
+    service: string
+    username: string,
+    password: string
+}
+
+interface AppSecrets {
+    auth: AuthSecrets,
+    email: EmailSecrets
+}
+
+
+
+
+export default <AppSecrets>require("./app.secrets.json");

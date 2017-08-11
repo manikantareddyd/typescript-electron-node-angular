@@ -1,14 +1,14 @@
 import * as passport from 'passport';
 import * as TwitterStrategy from 'passport-twitter';
-import AuthSecrets from '../../auth.secrets';
+import AppSecrets from '../../../app.secrets';
 import { Users } from '../../../db/models';
 import AuthService from '../../auth.service';
 import { Request, Response } from 'express';
 
 export default new TwitterStrategy({
-    consumerKey: AuthSecrets.twitter.consumer_key,
-    consumerSecret: AuthSecrets.twitter.consumer_secret,
-    callbackURL: AuthSecrets.twitter.callback,
+    consumerKey: AppSecrets.auth.twitter.consumer_key,
+    consumerSecret: AppSecrets.auth.twitter.consumer_secret,
+    callbackURL: AppSecrets.auth.twitter.callback,
     passReqToCallback: true,
     profileFields: ['id', 'displayName', 'photos', 'emails', 'name']
 },

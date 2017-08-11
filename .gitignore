@@ -263,3 +263,5 @@ __pycache__/
 dist/*
 
 src/server/auth/config.json
+
+src/server/app.secrets.json

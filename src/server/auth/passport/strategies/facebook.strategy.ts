@@ -1,16 +1,17 @@
 import * as passport from 'passport';
 import * as FacebookStrategy from 'passport-facebook';
-import AuthSecrets from '../../auth.secrets';
+import AppSecrets from '../../../app.secrets';
 import { Users } from '../../../db/models';
 import AuthService from '../../auth.service';
 import * as fs from 'fs';
 import { Request, Response } from 'express';
+
 export default new FacebookStrategy({
-    authorizationURL: AuthSecrets.facebook.auth_url,
-    tokenUrl: AuthSecrets.facebook.token_url,
-    clientID: AuthSecrets.facebook.app_id,
-    clientSecret: AuthSecrets.facebook.app_secret,
-    callbackURL: AuthSecrets.facebook.callback,
+    authorizationURL: AppSecrets.auth.facebook.auth_url,
+    tokenUrl: AppSecrets.auth.facebook.token_url,
+    clientID: AppSecrets.auth.facebook.app_id,
+    clientSecret: AppSecrets.auth.facebook.app_secret,
+    callbackURL: AppSecrets.auth.facebook.callback,
     passReqToCallback: true,
     profileFields: ['id', 'displayName', 'photos', 'email', 'name']
 },
