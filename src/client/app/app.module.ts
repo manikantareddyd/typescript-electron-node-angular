@@ -10,27 +10,28 @@ import { CookieService } from 'ngx-cookie-service';
 import {
     AppComponent,
     LoginComponent,
+    ForgotPasswordComponent,
     UsernameComponent,
     RegisterComponent,
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent
-} from './components/';
+} from './components/_';
 
 import {
     HeroService,
     AuthService
-} from './services';
+} from './services/_';
 
 import { AppRouter } from './app.router';
 
 import {
     MaterialModule
-} from './modules';
+} from './modules/_';
 
 import {
     AuthGuard
-} from './_guards';
+} from './_guards/_';
 
 import 'hammerjs';
 
@@ -49,6 +50,7 @@ import 'hammerjs';
         DashboardComponent,
         HeroDetailComponent,
         LoginComponent,
+        ForgotPasswordComponent,
         UsernameComponent,
         RegisterComponent,
         HeroesComponent

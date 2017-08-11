@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services';
+import { AuthService } from '../../../services/_';
 import { Router } from '@angular/router';
-import { User } from '../../../classes';
+import { User } from '../../../classes/_';
 @Component({
     selector: 'my-login',
     templateUrl: './login.component.html',
@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit {
                 else
                     this.message = "Incorrect username or password";
             });
+    }
+    
+    public forgotPassword() {
+        this.router.navigate(["forgotpass"]);
     }
 
     public goToRegister() {

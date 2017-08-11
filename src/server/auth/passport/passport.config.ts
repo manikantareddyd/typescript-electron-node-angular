@@ -2,7 +2,7 @@ import * as passport from 'passport';
 import {
     facebookStrategy,
     twitterStrategy
-} from './strategies';
+} from './strategies/_';
 
 function configure_passport(): void {
 

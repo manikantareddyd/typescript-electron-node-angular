@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 
-import { Hero } from '../../classes';
-import { HeroService } from '../../services';
+import { Hero } from '../../classes/_';
+import { HeroService } from '../../services/_';
 import { MdGridListModule } from '@angular/material';
-import { HeroDetailComponent } from '../../components';
+import { HeroDetailComponent } from '../../components/_';
 
 @Component({
     selector: 'my-heroes',

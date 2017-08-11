@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Users } from '../../db/models';
+import { Users } from '../../db/models/_';
 import AuthService from '../auth.service';
 
 export class AuthLocalController {

@@ -1,9 +1,10 @@
 <div class="container">
-    
+
     <form class="form-signin" name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+([a-zA-Z0-9_-])*$" minlength="4" maxlength="32" #username="ngModel"
+            class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
         <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
             <div [hidden]="!username.errors.required">
                 Username is required!
@@ -25,7 +26,8 @@
             </div>
         </div>
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" minlength="8" maxlength="64" #password="ngModel" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+        <input type="password" id="password" name="password" minlength="8" maxlength="64" #password="ngModel" class="form-control"
+            [(ngModel)]="user.password" placeholder="Password" required>
         <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
             <div [hidden]="!password.errors.required">
                 Password is required!

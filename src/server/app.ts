@@ -9,8 +9,8 @@ import * as mongoose from 'mongoose';
 import * as bluebird from 'bluebird';
 import passportConfig from './auth/passport/passport.config';
 
-import { Heroes } from './db/models';
-
+import { Heroes } from './db/models/_';
+import { EmailService } from './services/_';
 import AppRouter from './app.router';
 // Creates and configures an ExpressJS web server.
 class App {
@@ -31,6 +31,7 @@ class App {
         Heroes.count({}).then(h => {
             console.log("halala", h);
         })
+        EmailService.sendmail("oo");
     }
 
     // Configure Express middleware.

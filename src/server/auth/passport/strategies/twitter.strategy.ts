@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as TwitterStrategy from 'passport-twitter';
 import AppSecrets from '../../../app.secrets';
-import { Users } from '../../../db/models';
+import { Users } from '../../../db/models/_';
 import AuthService from '../../auth.service';
 import { Request, Response } from 'express';
 

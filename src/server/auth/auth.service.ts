@@ -1,8 +1,8 @@
 import * as crypto from 'crypto';
 import * as uuid from 'uuid/v4';
 import * as jwt from 'jsonwebtoken';
-import AuthSecrets from './auth.secrets';
-import { Users } from '../db/models'
+import AppSecrets from '../app.secrets';
+import { Users } from '../db/models/_';
 import { Request, Response } from 'express';
 class AuthService {
     public validatePassword(user, password) {
@@ -45,7 +45,7 @@ class AuthService {
         };
         let token = jwt.sign(
             payload,
-            AuthSecrets.jwt.secret
+            AppSecrets.auth.jwt.secret
         );
         return token;
     }
@@ -55,11 +55,14 @@ class AuthService {
         try {
             let token = cookies["token"];
             let id = cookies["id"];
-            dtoken = jwt.decode(token, { complete: true }) || {};
-            if (dtoken.payload.id === id)
-                return 1
+            dtoken = jwt.verify(
+                token,
+                AppSecrets.auth.jwt.secret
+            );
+            if (dtoken.id === id)
+                return 1;
             else
-                return 401
+                return 401;
         } catch (err) {
             return 401;
         }

@@ -1,4 +1,4 @@
-import { AuthSocialController } from './';
+import { AuthSocialController } from './_';
 import { Request, Response, NextFunction } from 'express';
 
 class AuthFacebookController {

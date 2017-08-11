@@ -1,4 +1,4 @@
-import { Hero } from '../classes';
+import { Hero } from '../classes/_';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';

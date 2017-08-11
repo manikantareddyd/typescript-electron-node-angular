@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as FacebookStrategy from 'passport-facebook';
 import AppSecrets from '../../../app.secrets';
-import { Users } from '../../../db/models';
+import { Users } from '../../../db/models/_';
 import AuthService from '../../auth.service';
 import * as fs from 'fs';
 import { Request, Response } from 'express';

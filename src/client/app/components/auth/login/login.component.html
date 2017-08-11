@@ -41,6 +41,7 @@
             {{message}}
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
+        <div (click)="forgotPassword()">Forgot Username or Password?</div>
     </form>
     <div class="form-signin">
         <button value="Register" class="btn btn-lg btn-success btn-block" (click)="goToRegister()">New User?</button>

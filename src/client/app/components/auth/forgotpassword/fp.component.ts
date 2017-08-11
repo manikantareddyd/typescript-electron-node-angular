@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services';
+import { AuthService } from '../../../services/_';
 import { Router } from '@angular/router';
-import { User } from '../../../classes';
+import { User } from '../../../classes/_';
 @Component({
-    selector: 'my-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    selector: 'my-forgotpassword',
+    templateUrl: './fp.component.html',
+    styleUrls: ['./fp.component.css']
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
     public user = new User();
     public message: string;
     public success = 1;
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit(): void {
-
+        console.log(this.router.url);
     }
     public onSubmit() {
         console.log(this.user.username, this.user.password);
