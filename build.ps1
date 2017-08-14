@@ -3,7 +3,7 @@
 function do_server {
     rm -r dist/server
     rm -r dist/assets
-    cp -r .\src\assets .\dist\ 
+    cp -r .\src\assets .\dist\assets
     gulp
 }
 
