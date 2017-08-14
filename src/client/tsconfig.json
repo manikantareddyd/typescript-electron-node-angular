@@ -1,9 +1,10 @@
 {
+    "compileOnSave": true,
     "compilerOptions": {
         "target": "es5",
-        "module": "es2015",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": false,
+        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
@@ -13,15 +14,10 @@
         "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true,
         "typeRoots": [
-            "node_modules/@types/"
+            "./node_modules/@types/"
         ]
     },
-    "include": [
-        "**/*"
-    ],
-    "compileOnSave": false,
     "exclude": [
-        "node_modules/*",
-        "**/*-aot.ts"
+        "aot-files"
     ]
 }

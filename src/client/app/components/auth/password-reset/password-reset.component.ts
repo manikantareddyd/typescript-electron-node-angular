@@ -3,11 +3,11 @@ import { AuthService } from '../../../services/_';
 import { Router } from '@angular/router';
 import { User } from '../../../classes/_';
 @Component({
-    selector: 'my-forgotpassword',
-    templateUrl: './fp.component.html',
-    styleUrls: ['./fp.component.css']
+    selector: 'my-password-reset',
+    templateUrl: './password-reset.component.html',
+    styleUrls: ['./password-reset.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class PasswordResetComponent implements OnInit {
     public user = new User();
     public message: string;
     public success = 1;

@@ -26,7 +26,7 @@ export class HeroService {
 
 
     getHero(id: number): Promise<Hero> {
-        let token = this.authService.getAuthdetails()["token"]
+        let token = this.authService.getAuthdetails()["token"];
         let headers = new Headers({ 'Authorization': 'Bearer ' + token });
         let options = new RequestOptions({ headers: headers, withCredentials: true });
         return this.http.get(this.getOneUrl + '/' + id.toString(), options)

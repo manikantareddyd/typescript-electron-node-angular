@@ -55,6 +55,10 @@ export class AuthService {
             .then(this.saveToken)
             .catch();
     }
+    
+    public forgotPassword(username: string) {
+        return ;
+    }
 
     public saveToken(res: Response) {
         let body = JSON.parse(res["_body"]);

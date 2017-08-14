@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import {
     AppComponent,
     LoginComponent,
-    ForgotPasswordComponent,
+    PasswordResetComponent,
     UsernameComponent,
     RegisterComponent,
     DashboardComponent,
@@ -50,7 +50,7 @@ import 'hammerjs';
         DashboardComponent,
         HeroDetailComponent,
         LoginComponent,
-        ForgotPasswordComponent,
+        PasswordResetComponent,
         UsernameComponent,
         RegisterComponent,
         HeroesComponent
