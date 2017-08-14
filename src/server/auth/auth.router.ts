@@ -17,6 +17,9 @@ let AuthRouter = express.Router();
 
 AuthRouter.post('/login', AuthLocalController.loginUser);
 AuthRouter.post('/register', AuthLocalController.registerUser);
+AuthRouter.post('/forgotpassword', AuthLocalController.forgotPassword);
+AuthRouter.get('/reset/:resetToken', AuthLocalController.resetPassword);
+
 
 AuthRouter.post('/updateUsername', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);

@@ -3,6 +3,7 @@ import * as FacebookStrategy from 'passport-facebook';
 import AppSecrets from '../../../app.secrets';
 import { Users } from '../../../db/models/_';
 import AuthService from '../../auth.service';
+import { CryptService } from '../../../services/_';
 import * as fs from 'fs';
 import { Request, Response } from 'express';
 
@@ -52,7 +53,7 @@ export default new FacebookStrategy({
                             console.log(newUser);
                             console.log("***************");
                             console.log(profile);
-                            newUser.id = AuthService.genId();
+                            newUser.id = CryptService.genId();
                             newUser.facebook.id = profile.id;
                             newUser.facebook.token = token;
                             newUser.facebook.displayName = profile.displayName;

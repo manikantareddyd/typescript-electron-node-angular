@@ -15,8 +15,9 @@ import {
 const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'forgotpass', component: UsernameComponent, data: {forgotpassword: true} },
-    { path: 'username', component: UsernameComponent,  },
+    { path: 'forgotpass', component: UsernameComponent, data: { forgotpassword: true } },
+    { path: 'username', component: UsernameComponent },
+    { path: 'password-reset', component: PasswordResetComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'heroes', component: HeroesComponent, canActivate: [AuthGuard] }

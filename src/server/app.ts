@@ -31,7 +31,7 @@ class App {
         Heroes.count({}).then(h => {
             console.log("halala", h);
         })
-        EmailService.sendmail("oo");
+        
     }
 
     // Configure Express middleware.

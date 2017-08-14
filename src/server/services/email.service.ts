@@ -10,7 +10,7 @@ class EmailService {
         }
     });
     public mailOptions = {
-        
+        from: AppSecrets.email.username,
         to: "manikanta.reddy.d@outlook.com", // list of receivers
         subject: 'Hello ✔', // Subject line
         text: 'Hello world ?', // plain text body
@@ -18,8 +18,9 @@ class EmailService {
     };
 
 
-    sendmail(token: string) {
-        this.mailOptions.text += token;
+    sendmail(url: string) {
+        this.mailOptions.html += url;
+        console.log("Sending mail", this.mailOptions.html);
         this.transporter.sendMail(this.mailOptions)
             .then(info => {
                 console.log('Message %s sent: %s', info.messageId, info.response);

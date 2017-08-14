@@ -14,6 +14,7 @@ export class AuthService {
     private logoutUrl = 'auth/logout';
     private registerUrl = 'auth/register';
     private validateUrl = 'auth/validateToken';
+    private forgotPassUrl = 'auth/forgotpassword';
     private updateUsernameUrl = 'auth/updateUsername';
     private facebookUrl = 'auth/facebook';
     constructor(private http: Http, private router: Router, private cookieService: CookieService) { }
@@ -57,7 +58,14 @@ export class AuthService {
     }
     
     public forgotPassword(username: string) {
-        return ;
+        console.log("hahahahahaha");
+        let body = "username=" + username;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.forgotPassUrl, body, options)
+            .toPromise()
+            .then()
+            .catch();
     }
 
     public saveToken(res: Response) {
@@ -68,13 +76,12 @@ export class AuthService {
     }
 
     public getAuthdetails() {
+        let cookies = this.cookieService.getAll();
+        return cookies;
+    }
 
-        let username = this.cookieService.get('username');
-        let id = this.cookieService.get('id');
-        return {
-            id: id,
-            username: username
-        };
+    public deleteAuthDetails() {
+        this.cookieService.deleteAll();
     }
 
     private handleError(error: Response | any) {

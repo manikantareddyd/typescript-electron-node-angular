@@ -23,7 +23,12 @@ export class HeroesComponent implements OnInit {
     ) { }
 
     getHeroes(): void {
-        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+        this.heroService.getHeroes()
+            .then(data => {
+                if (data.httpStatus == 401)
+                    this.router.navigate(["/"]);
+                this.heroes = data.heroes;
+            });
     }
 
     ngOnInit(): void {

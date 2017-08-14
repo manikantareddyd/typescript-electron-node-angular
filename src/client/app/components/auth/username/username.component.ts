@@ -29,7 +29,7 @@ export class UsernameComponent implements OnInit {
             this.title = "Enter Your Username";
             this.authService.forgotPassword(this.user.username);
             this.success = 0;
-            this.message = "If the Username exists in our Database, an Email will be sent to the registered Email Id.<br> Click on the Password Reset Link in it.<br>You may now close this window.";
+            this.message = "If the Username exists in our System, an Email will be sent to the registered Email Id. Click on the Password Reset Link in it. You may now close this window.";
         }
         else {
             this.title = "Choose a username";

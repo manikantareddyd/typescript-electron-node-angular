@@ -11,9 +11,12 @@ export class PasswordResetComponent implements OnInit {
     public user = new User();
     public message: string;
     public success = 1;
+    public cookie = {};
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit(): void {
+        this.cookie = this.authService.getAuthdetails();
+        this.authService.deleteAuthDetails();
         console.log(this.router.url);
     }
     public onSubmit() {
@@ -28,28 +31,4 @@ export class PasswordResetComponent implements OnInit {
             });
     }
 
-    public goToRegister() {
-        console.log("Register Clicked");
-        this.router.navigate(["register"]);
-    }
-
-    public gotoFacebook() {
-        console.log("Facebook clicked");
-        this.authService.facebook(null)
-            .then(success => {
-                if (success == 3) {
-                    this.success = 0;
-                    this.message = "Facebook account already linked with someone else!"
-                }
-                else if (success == 1) {
-                    this.success = 1;
-                    location.reload();
-                }
-                else {
-                    this.success = 0;
-                    this.message = "hey ram"
-                }
-
-            });
-    }
 }

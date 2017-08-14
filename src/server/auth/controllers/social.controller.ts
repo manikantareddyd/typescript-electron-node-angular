@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { Users } from '../../db/models/_';
-import AuthService from '../auth.service';
+import { TokenService } from '../../services/_';
 import * as passport from 'passport';
 
 
 class AuthSocialController {
-    
+
     public authenticate(social, req: Request, res: Response, next: NextFunction) {
         console.log(req.headers["id"], req.query["id"], "authen");
         req.headers["id"] = req.query["id"];
@@ -26,7 +26,7 @@ class AuthSocialController {
             if (user.username) {
                 res.cookie("username", user.username);
             }
-            res.cookie("token", AuthService.getToken(user.id), { httpOnly: true });
+            res.cookie("token", TokenService.getToken(user.id), { httpOnly: true });
             res.redirect("/");
 
         })(req, res, next);

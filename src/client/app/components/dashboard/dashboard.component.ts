@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { Hero } from '../../classes/_';
 import { HeroService } from '../../services/_';
 import { HeroDetailComponent } from '../../components/_';
@@ -14,13 +15,17 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private heroService: HeroService,
-        public dialog: MdDialog
+        public dialog: MdDialog,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
         this.heroService.getHeroes()
-            .then(heroes => {
-                this.heroes = heroes.slice(1, 5)
+            .then(data => {
+                console.log(data);
+                if (data.httpStatus == 401)
+                    this.router.navigate(["/"]);
+                this.heroes = data.heroes.slice(1, 5)
             });
     }
 

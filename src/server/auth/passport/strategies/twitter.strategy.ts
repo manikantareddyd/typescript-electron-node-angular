@@ -3,6 +3,7 @@ import * as TwitterStrategy from 'passport-twitter';
 import AppSecrets from '../../../app.secrets';
 import { Users } from '../../../db/models/_';
 import AuthService from '../../auth.service';
+import { CryptService } from '../../../services/_';
 import { Request, Response } from 'express';
 
 export default new TwitterStrategy({
@@ -52,7 +53,7 @@ export default new TwitterStrategy({
                             console.log(newUser);
                             console.log("***************");
                             console.log(profile);
-                            newUser.id = AuthService.genId();
+                            newUser.id = CryptService.genId();
                             newUser.twitter.id = profile.id;
                             newUser.twitter.token = token;
                             newUser.twitter.displayName = profile.displayName;

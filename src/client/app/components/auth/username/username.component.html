@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="form-signin" (ngSubmit)="onSubmit()">
+    <form class="form-signin" name="loginForm" (ngSubmit)="onSubmit()">
         <h2 class="form-signin-heading">{{ title }}</h2>
         <label for="username" class="sr-only">Username</label>
         <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
@@ -24,6 +24,6 @@
             </div>
         </div>
         <div *ngIf="!success" class="alert alert-danger">{{message}}</div>
-        <button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
+        <button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!loginForm.form.valid">Update</button>
     </form>
 </div>

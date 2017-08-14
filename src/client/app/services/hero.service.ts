@@ -1,4 +1,4 @@
-import { Hero } from '../classes/_';
+import { Hero, ResData } from '../classes/_';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -14,30 +14,32 @@ export class HeroService {
     private getOneUrl = 'api/v1/heroes/getOne';
     constructor(private http: Http, private authService: AuthService) { }
 
-    getHeroes(): Promise<Hero[]> {
+    getHeroes(): Promise<ResData> {
         let token = this.authService.getAuthdetails()["token"]
         let headers = new Headers({ 'Authorization': 'Bearer ' + token });
         let options = new RequestOptions({ headers: headers, withCredentials: true });
         return this.http.get(this.getAllUrl, options)
             .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+            .then(this.extractData);
     }
 
 
-    getHero(id: number): Promise<Hero> {
+    getHero(id: number): Promise<ResData> {
         let token = this.authService.getAuthdetails()["token"];
         let headers = new Headers({ 'Authorization': 'Bearer ' + token });
         let options = new RequestOptions({ headers: headers, withCredentials: true });
         return this.http.get(this.getOneUrl + '/' + id.toString(), options)
             .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+            .then(this.extractData);
     }
 
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
+    private extractData(res: Response): ResData {
+        let body = res.json() || {};
+        let data = new ResData();
+        data.hero = body;
+        data.heroes = body;
+        data.httpStatus = res.status;
+        return data;
     }
 
     private handleError(error: Response | any) {
