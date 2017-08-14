@@ -2,17 +2,20 @@
 
 function do_server {
     rm -r dist/server
+    rm -r dist/assets
+    cp -r .\src\assets .\dist\ 
     gulp
 }
 
 function do_client_aot {
     rm -r dist/client
     cp -r ./src/client ./dist/client
-    node_modules/.bin/ngc -p dist/client/tsconfig-aot.json
-    cp .\dist\client\aot-files\main.ts .\dist\client\main.ts
-    node_modules/.bin/ngc -p dist/client/tsconfig-aot.json
+    cp .\dist\client\aot-files\tsconfig.json .\dist\client\tsconfig.json
     cp .\dist\client\aot-files\index.html .\dist\server\index.html
     cp .\dist\client\aot-files\index.html .\dist\client\index.html
+    node_modules/.bin/ngc -p dist/client/tsconfig.json
+    cp .\dist\client\aot-files\main.ts .\dist\client\main.ts
+    node_modules/.bin/ngc -p dist/client/tsconfig.json
     node_modules\.bin\rollup -c dist/client/aot-files/rollup-config.js
 }
 
