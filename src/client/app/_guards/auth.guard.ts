@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
         let cookies = this.authService.getAuthdetails();
-        if (cookies["password-reset"]) {
+        if (cookies["password-reset"] == "1") {
             console.log("Rsetting password");
             this.router.navigate(["password-reset"]);
             return false;

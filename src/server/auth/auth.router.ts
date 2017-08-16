@@ -17,11 +17,12 @@ let AuthRouter = express.Router();
 
 AuthRouter.post('/login', AuthLocalController.loginUser);
 AuthRouter.post('/register', AuthLocalController.registerUser);
-AuthRouter.post('/forgotpassword', AuthLocalController.forgotPassword);
-AuthRouter.get('/reset/:resetToken', AuthLocalController.resetPassword);
 
+AuthRouter.post('/password/forgot', AuthLocalController.forgotPassword);
+AuthRouter.get('/password/reset/:resetToken', AuthLocalController.resetPassword);
+AuthRouter.post('/password/reset', AuthLocalController.resetPassword);
 
-AuthRouter.post('/updateUsername', AuthLocalController.updateUsername);
+AuthRouter.post('/username/update', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
 
 

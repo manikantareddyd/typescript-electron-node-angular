@@ -18,17 +18,18 @@ class EmailService {
     };
 
 
-    sendmail(url: string) {
+    sendmail(url: string, pin: string) {
         this.mailOptions.html += url;
+        this.mailOptions.html += "<br>" + pin;
         console.log("Sending mail", this.mailOptions.html);
-        this.transporter.sendMail(this.mailOptions)
-            .then(info => {
-                console.log('Message %s sent: %s', info.messageId, info.response);
-            }).catch(error => {
-                if (error) {
-                    return console.log(error);
-                }
-            })
+        // this.transporter.sendMail(this.mailOptions)
+        //     .then(info => {
+        //         console.log('Message %s sent: %s', info.messageId, info.response);
+        //     }).catch(error => {
+        //         if (error) {
+        //             return console.log(error);
+        //         }
+        //     })
     }
 }
 

@@ -1,9 +1,10 @@
 <div class="container">
-    
-    <form class="form-signin" name="registerForm" #registerForm="ngForm" (ngSubmit)="onSubmit()">
-        <h2 class="form-signin-heading">Sign up here</h2>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+
+    <form class="my-form" name="registerForm" #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <h2 class="my-form-heading">Sign up here</h2>
+        <label for="username" class="control-label">Username</label>
+        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32"
+            #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
         <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
             <div [hidden]="!username.errors.required">
                 Username is required!
@@ -24,8 +25,9 @@
                 Username should be a maximum of 32 characters in length!
             </div>
         </div>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" minlength="8" maxlength="64" #password="ngModel" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+        <label for="password" class="control-label">Password</label>
+        <input type="password" id="password" name="password" minlength="8" maxlength="64" #password="ngModel" class="form-control"
+            [(ngModel)]="user.password" placeholder="Password" required>
         <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
             <div [hidden]="!password.errors.required">
                 Password is required!
@@ -40,8 +42,8 @@
         <div *ngIf="!success" class="alert alert-danger">{{message}}</div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.form.valid">Register</button>
     </form>
-    
-    <div class="form-signin">
+
+    <div class="my-form">
         <a href="auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook">
             <span class="fa fa-facebook"></span>
             Continue with Facebook

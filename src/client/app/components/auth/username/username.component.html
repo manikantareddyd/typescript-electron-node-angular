@@ -1,8 +1,9 @@
 <div class="container">
-    <form class="form-signin" name="loginForm" (ngSubmit)="onSubmit()">
-        <h2 class="form-signin-heading">{{ title }}</h2>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32" #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
+    <form class="my-form" name="usernameForm" #usernameForm="ngForm" (ngSubmit)="onSubmit()">
+        <h2 class="my-form-heading">{{ title }}</h2>
+        <label for="username" class="control-label">Username</label>
+        <input type="text" id="username" name="username" pattern="^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$" minlength="4" maxlength="32"
+            #username="ngModel" class="form-control" [(ngModel)]="user.username" placeholder="Username" required autofocus>
         <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
             <div [hidden]="!username.errors.required">
                 Username is required!
@@ -23,7 +24,11 @@
                 Username should be a maximum of 32 characters in length!
             </div>
         </div>
-        <div *ngIf="!success" class="alert alert-danger">{{message}}</div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!loginForm.form.valid">Update</button>
+        <div *ngIf="!forgotpass && !success" class="alert alert-danger">{{message}}</div>
+        <div *ngIf="forgotpass && !success" class="alert alert-danger">
+            If your Username is present in our System, we'll send an Email to your registered Email address with instructions on resetting
+            your password.
+        </div>
+        <button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!usernameForm.form.valid">Update</button>
     </form>
 </div>

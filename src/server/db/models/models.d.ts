@@ -21,6 +21,7 @@ export interface IUser extends mongoose.Document {
     id: string,
     username: string,
     password: string,
+    resetTokenHash: string,
     name: {
         familyName: string,
         givenName: string,

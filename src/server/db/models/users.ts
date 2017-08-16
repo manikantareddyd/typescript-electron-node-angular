@@ -10,7 +10,7 @@ let userSchema = new mongoose.Schema({
     username: { type: String, index: true },
     hashpass: String,
     salt: String,
-    hashToken: String,
+    resetTokenHash: String,
     name: {
         familyName: String,
         givenName: String,

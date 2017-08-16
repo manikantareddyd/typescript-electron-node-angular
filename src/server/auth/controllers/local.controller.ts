@@ -128,38 +128,124 @@ export class AuthLocalController {
 
     forgotPassword(req: Request, res: Response) {
         let username = req.body["username"];
-        console.log("hahahahalelelele");
+        console.log("Forgot Password!");
         let now = Math.floor(Date.now() / 1000).toString();
         let token = CryptService.genId();
-        let hashToken = CryptService.hash(token);
-        console.log(token, hashToken);
-        let resetToken = CryptService.encrypt(token + "." + now);
-        Users.findOneAndUpdate({ username: username }, { hashToken: hashToken })
+        let pin = Math.floor(Math.random() * 90000) + 10000;
+        let resetTokenHash = CryptService.hash(token + "." + pin);
+        let resetToken = CryptService.encrypt(token + "." + now + "." + pin);
+        Users.findOneAndUpdate({ username: username }, { resetTokenHash: resetTokenHash })
             .then(user => {
-                let url = "http://localhost:3000/auth/reset/" + resetToken;
-                EmailService.sendmail(url);
+                if (user != null) {
+                    let url = "http://localhost:3000/auth/password/reset/" + resetToken;
+                    EmailService.sendmail(url, pin.toString());
+                } else {
+                    console.log("Wrong Username");
+                }
             });
     }
 
     resetPassword(req: Request, res: Response) {
+        let resetToken;
         let params = req.params;
-        let resetToken = CryptService.decrypt(params["resetToken"]);
+        if (req.method == "GET") {
+            resetToken = CryptService.decrypt(params["resetToken"]);
+            res.clearCookie("token");
+            res.clearCookie("id");
+            res.clearCookie("username");
+        } else if (req.method == "POST") {
+            resetToken = CryptService.decrypt(req.cookies["reset-token"]);
+            res.clearCookie("reset-token");
+            res.clearCookie("password-reset");
+        } else {
+            res.send({
+                success: 0
+            });
+            return;
+        }
+
         if (!resetToken) {
-            res.redirect("/");
+            res.cookie("password-reset-message", "Reset Link Invalid");
+            res.send({
+                success: 0
+            });
+            return;
         }
         let token = resetToken.split(".")[0];
         let iat = parseInt(resetToken.split(".")[1]);
+        let pintok = resetToken.split(".")[2];
+        if (Math.floor(Date.now() / 1000) - iat > 3600) {
+            res.cookie("password-reset-message", "Reset Link Expired");
+            res.send({
+                success: 0
+            });
+            return;
+        }
 
-        console.log(token, iat, CryptService.hash(token));
-
-        if (Math.floor(Date.now() / 1000) - iat > 86400)
+        if (req.method == "GET") {
+            res.cookie("password-reset", 1);
+            res.cookie("reset-token", params["resetToken"]);
             res.redirect("/");
+            return;
+        } else if (req.method == "POST") {
+            let newPassword = req.body["password"];
+            let pin = req.body["pin"];
+            let resetTokenHash = CryptService.hash(token + "." + pintok);
+            if (pin != pintok) {
+                res.cookie("password-reset-message", "Invalid OTP. Request PIN again.");
+                Users.findOneAndUpdate(
+                    { resetTokenHash: resetTokenHash },
+                    { resetTokenHash: "" }
+                ).then(user => {
+                    if (!user) {
+                        res.cookie("password-reset-message", "Reset Link Expired");
+                    }
+                    res.send({
+                        success: 0
+                    });
 
-        res.cookie("password-reset", 1);
-        res.cookie("reset-token", params["resetToken"]);
-        
-        res.redirect("/");
+                }).catch(err => {
+                    res.send({
+                        success: 0
+                    });
+                });
+                return;
+            }
+            let secrets = AuthService.genUser("", newPassword);
+            Users.findOneAndUpdate(
+                { resetTokenHash: resetTokenHash },
+                {
+                    salt: secrets.salt,
+                    hashpass: secrets.hashpass,
+                    resetTokenHash: ""
+                }
+            ).then(user => {
+                if (user) {
+                    res.cookie("password-reset-message", "Password Reset Successful");
+                    res.send({
+                        success: 1
+                    });
+                } else {
+                    res.cookie("password-reset-message", "Reset Link Expired");
+                    res.send({
+                        success: 0
+                    });
+                }
+            }).catch(err => {
+                res.cookie("password-reset-message", "Reset Link Expired");
+                res.send({
+                    success: 0
+                });
+                return;
+            });
+        } else {
+            res.send({
+                success: 0
+            });
+            return;
+        }
     }
+
 }
 
 export default new AuthLocalController();

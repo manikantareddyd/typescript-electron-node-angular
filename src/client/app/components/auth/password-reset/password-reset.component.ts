@@ -8,26 +8,23 @@ import { User } from '../../../classes/_';
     styleUrls: ['./password-reset.component.css']
 })
 export class PasswordResetComponent implements OnInit {
-    public user = new User();
+    public model = {
+        password: "",
+        pin: ""
+    };
     public message: string;
     public success = 1;
     public cookie = {};
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit(): void {
-        this.cookie = this.authService.getAuthdetails();
-        this.authService.deleteAuthDetails();
-        console.log(this.router.url);
+
     }
     public onSubmit() {
-        console.log(this.user.username, this.user.password);
-        this.authService.login(this.user.username, this.user.password)
+        console.log(this.model.password, this.model.pin);
+        this.authService.resetPassword(this.model.pin, this.model.password)
             .then(success => {
-                this.success = success;
-                if (success)
-                    location.reload();
-                else
-                    this.message = "Incorrect username or password";
+                location.reload();
             });
     }
 

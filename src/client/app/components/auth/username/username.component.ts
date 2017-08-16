@@ -12,11 +12,14 @@ export class UsernameComponent implements OnInit {
     public message: string;
     public success = 1;
     title: string;
+    public forgotpass = 0;
     constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        if (this.route.snapshot.data['forgotpassword']) {
-            this.title = "Enter Your Usernamedssx";
+        this.forgotpass = localStorage.getItem("forgotpass") == "true" ? 1 : 0;
+        if (this.forgotpass) {
+            this.title = "Enter Your Username";
+            localStorage.removeItem("forgotpass");
         }
         else {
             this.title = "Choose a username";
@@ -25,14 +28,11 @@ export class UsernameComponent implements OnInit {
 
     public onSubmit() {
         console.log(this.user.username);
-        if (this.route.snapshot.data['forgotpassword']) {
-            this.title = "Enter Your Username";
+        if (this.forgotpass) {
             this.authService.forgotPassword(this.user.username);
             this.success = 0;
-            this.message = "If the Username exists in our System, an Email will be sent to the registered Email Id. Click on the Password Reset Link in it. You may now close this window.";
         }
         else {
-            this.title = "Choose a username";
             this.authService.updateUsername(this.user.username)
                 .then(success => {
                     this.success = success;

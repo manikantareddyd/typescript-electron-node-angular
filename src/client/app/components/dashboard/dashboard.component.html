@@ -1,10 +1,10 @@
- <div class="container"> 
-  <h2>Top Heroes</h2>
-  <md-grid-list cols="2" rowHeight="2:1">
-    <md-grid-tile *ngFor="let hero of heroes" (click)="gotoDetail(hero)">
-        <div class="module hero">
-          <h4>{{hero.name}}</h4>
-        </div>
-    </md-grid-tile>
-  </md-grid-list>
- </div> 
+<div class="container">
+    <h2>Top Heroes</h2>
+    <md-grid-list cols="2" rowHeight="2:1">
+        <md-grid-tile *ngFor="let hero of heroes" (click)="gotoDetail(hero)">
+            <div class="module hero">
+                <h4>{{hero.name}}</h4>
+            </div>
+        </md-grid-tile>
+    </md-grid-list>
+</div>

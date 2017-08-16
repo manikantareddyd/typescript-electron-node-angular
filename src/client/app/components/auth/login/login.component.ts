@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
                     this.message = "Incorrect username or password";
             });
     }
-    
+
     public forgotPassword() {
+        localStorage.setItem("forgotpass", "true");
         this.router.navigate(["forgotpass"]);
     }
 

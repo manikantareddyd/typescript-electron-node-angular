@@ -14,10 +14,11 @@ export class AuthService {
     private logoutUrl = 'auth/logout';
     private registerUrl = 'auth/register';
     private validateUrl = 'auth/validateToken';
-    private forgotPassUrl = 'auth/forgotpassword';
-    private updateUsernameUrl = 'auth/updateUsername';
+    private forgotPassUrl = 'auth/password/forgot';
+    private resetPassUrl = 'auth/password/reset';
+    private updateUsernameUrl = 'auth/username/update';
     private facebookUrl = 'auth/facebook';
-    constructor(private http: Http, private router: Router, private cookieService: CookieService) { }
+    constructor(private http: Http, private router: Router, public cookieService: CookieService) { }
 
     public logout() {
         return this.http.get(this.logoutUrl)
@@ -32,7 +33,7 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.loginUrl, body, options)
             .toPromise()
-            .then(this.saveToken)
+            .then(this.handleResponse)
             .catch();
     }
 
@@ -42,7 +43,7 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.registerUrl, body, options)
             .toPromise()
-            .then(this.saveToken)
+            .then(this.handleResponse)
             .catch();
     }
 
@@ -53,10 +54,10 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.updateUsernameUrl, body, options)
             .toPromise()
-            .then(this.saveToken)
+            .then(this.handleResponse)
             .catch();
     }
-    
+
     public forgotPassword(username: string) {
         console.log("hahahahahaha");
         let body = "username=" + username;
@@ -68,7 +69,18 @@ export class AuthService {
             .catch();
     }
 
-    public saveToken(res: Response) {
+    public resetPassword(pin: string, password: string) {
+        console.log("hahahahahaha");
+        let body = "pin=" + pin + "&password=" + password;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.resetPassUrl, body, options)
+            .toPromise()
+            .then(this.handleResponse)
+            .catch();
+    }
+
+    public handleResponse(res: Response) {
         let body = JSON.parse(res["_body"]);
         let success = body["success"];
         console.log(success);
@@ -103,7 +115,7 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.facebookUrl + "?id=" + id, options)
             .toPromise()
-            .then(this.saveToken)
+            .then(this.handleResponse)
             .catch(this.handleError);
     }
 }
