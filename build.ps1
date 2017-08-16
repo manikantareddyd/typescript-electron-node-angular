@@ -1,39 +1,39 @@
 
 
 function do_server {
-    rm -r dist/server
-    rm -r dist/assets
-    cp -r .\src\assets .\dist\assets
+    Remove-Item -r dist/server
+    Remove-Item -r dist/assets
+    Copy-Item -r ./src/assets ./dist/assets
     gulp
 }
 
 function do_client_aot {
-    rm -r dist/client
-    cp -r ./src/client ./dist/client
+    Remove-Item -r dist/client
+    Copy-Item -r ./src/client ./dist/client
     
     # Configure AOT files
-    cp .\dist\client\aot-files\tsconfig.json .\dist\client\tsconfig.json
-    cp .\dist\client\aot-files\index.html .\dist\server\index.html
-    cp .\dist\client\aot-files\index.html .\dist\client\index.html
+    Copy-Item ./dist/client/aot-files/tsconfig.json ./dist/client/tsconfig.json
+    Copy-Item ./dist/client/aot-files/index.html ./dist/server/index.html
+    Copy-Item ./dist/client/aot-files/index.html ./dist/client/index.html
     node_modules/.bin/ngc -p dist/client/tsconfig.json
-    cp .\dist\client\aot-files\main.ts .\dist\client\main.ts
+    Copy-Item ./dist/client/aot-files/main.ts ./dist/client/main.ts
     node_modules/.bin/ngc -p dist/client/tsconfig.json
-    node_modules\.bin\rollup -c dist/client/aot-files/rollup-config.js
+    node_modules/.bin/rollup -c dist/client/aot-files/rollup-config.js
     
     # Clean Other Files
-    cp .\dist\client\build.js .\dist\build.js
-    rm -r .\dist\client
-    mkdir .\dist\client
-    cp .\dist\build.js .\dist\client\build.js
-    cp .\dist\server\index.html .\dist\client\index.html
-    rm .\dist\build.js
+    Copy-Item ./dist/client/build.js ./dist/build.js
+    Remove-Item -r ./dist/client
+    mkdir ./dist/client
+    Copy-Item ./dist/build.js ./dist/client/build.js
+    Copy-Item ./dist/server/index.html ./dist/client/index.html
+    Remove-Item ./dist/build.js
 }
 
 function do_client {
-    rm -r dist/client
-    cp -r ./src/client ./dist/client
-    cp ./dist/client/systemjs/* ./dist/client
-    cp .\dist\client\index.html .\dist\server\index.html
+    Remove-Item -r dist/client
+    Copy-Item -r ./src/client ./dist/client
+    Copy-Item ./dist/client/systemjs/* ./dist/client
+    Copy-Item ./dist/client/index.html ./dist/server/index.html
     node_modules/.bin/ngc -p dist/client/tsconfig.json
 }
 
@@ -63,7 +63,7 @@ switch ($args[0]) {
         do_client
     }
     "clean" {
-        rm -r dist
+        Remove-Item -r dist
     }
     "start" {
         npm start
