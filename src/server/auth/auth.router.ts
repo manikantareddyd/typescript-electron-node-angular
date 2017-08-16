@@ -20,7 +20,7 @@ AuthRouter.post('/register', AuthLocalController.registerUser);
 
 AuthRouter.post('/password/forgot', AuthLocalController.forgotPassword);
 AuthRouter.get('/password/reset/:resetToken', AuthLocalController.resetPassword);
-AuthRouter.post('/password/reset', AuthLocalController.resetPassword);
+AuthRouter.post('/password/reset', AuthLocalController.changePassword);
 
 AuthRouter.post('/username/update', AuthLocalController.updateUsername);
 AuthRouter.get('/validateToken', authenticate, AuthController.validateToken);
