@@ -10,6 +10,8 @@ function do_server {
 function do_client_aot {
     rm -r dist/client
     cp -r ./src/client ./dist/client
+    
+    # Configure AOT files
     cp .\dist\client\aot-files\tsconfig.json .\dist\client\tsconfig.json
     cp .\dist\client\aot-files\index.html .\dist\server\index.html
     cp .\dist\client\aot-files\index.html .\dist\client\index.html
@@ -17,6 +19,14 @@ function do_client_aot {
     cp .\dist\client\aot-files\main.ts .\dist\client\main.ts
     node_modules/.bin/ngc -p dist/client/tsconfig.json
     node_modules\.bin\rollup -c dist/client/aot-files/rollup-config.js
+    
+    # Clean Other Files
+    cp .\dist\client\build.js .\dist\build.js
+    rm -r .\dist\client
+    mkdir .\dist\client
+    cp .\dist\build.js .\dist\client\build.js
+    cp .\dist\server\index.html .\dist\client\index.html
+    rm .\dist\build.js
 }
 
 function do_client {
