@@ -11,13 +11,14 @@ export class AppComponent {
     title = 'Tour of Heroes 2.0';
     public id: string = null;
     public cookie = {};
-    public passwordResetMessage = "";
+
+
     constructor(private authService: AuthService, private router: Router, public snackBar: MdSnackBar) {
-        this.id = this.authService.getAuthdetails()["id"];
-        this.passwordResetMessage = this.authService.getAuthdetails()["password-reset-message"];
-        if (this.passwordResetMessage) {
-            this.authService.cookieService.delete("password-reset-message");
-            this.snackBar.open(this.passwordResetMessage, "", {
+        this.id = this.authService.cookieService.get("id");
+        let message = this.authService.cookieService.get("snackbar-message");
+        if (message) {
+            this.authService.cookieService.delete("snackbar-message");
+            this.snackBar.open(message, "", {
                 duration: 5000
             });
         }

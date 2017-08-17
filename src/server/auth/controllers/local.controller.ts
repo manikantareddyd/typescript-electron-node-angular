@@ -21,6 +21,7 @@ export class AuthLocalController {
                         res.cookie("id", user.id)
                         res.cookie("username", user.username);
                         res.cookie("token", token, { httpOnly: true });
+                        res.cookie("snackbar-message", "Hi, " + user.username + "! Login Successful!");
                         res.send({
                             success: 1
                         });
@@ -54,23 +55,29 @@ export class AuthLocalController {
                     console.log("New User");
                     let secrets = AuthService.genUser(username, password);
                     let newuser = new Users(secrets);
-                    newuser.save(function (err, dbuser) {
-                        if (err) {
-                            console.log("db error 2", err);
+                    console.log(secrets, newuser);
+                    newuser.save()
+                        .then(function (dbuser) {
+                            console.log("User Created", secrets.username, secrets.id);
+                            let token = TokenService.getToken(secrets.id);
+                            res.cookie("id", secrets.id);
+                            res.cookie("username", secrets.username);
+                            res.cookie("token", token, { httpOnly: true });
+                            res.cookie("snackbar-message", "Hi, " + secrets.username + "! Welcome Onboard!");
                             res.send({
-                                success: 0
-                            })
+                                success: 1
+                            });
                             return;
-                        }
-                        console.log("User Created", secrets.username, secrets.id);
-                        let token = TokenService.getToken(secrets.id);
-                        res.cookie("id", secrets.id)
-                        res.cookie("username", secrets.username);
-                        res.cookie("token", token, { httpOnly: true });
-                        res.send({
-                            success: 1
+                        }).catch(err => {
+                            if (err) {
+                                console.log("db error 2", err);
+                                res.cookie("snackbar-message", "Something Went Wrong!");
+                                res.send({
+                                    success: 0
+                                })
+                                return;
+                            }
                         });
-                    });
 
                 }
             }).catch(err => {
@@ -107,6 +114,7 @@ export class AuthLocalController {
                         res.cookie("id", id)
                         res.cookie("username", username);
                         res.cookie("token", token, { httpOnly: true });
+                        res.cookie("snackbar-message", "Hi, " + username + "! Username was Updated!");
                         res.send({
                             success: 1
                         })
@@ -153,7 +161,7 @@ export class AuthLocalController {
         res.clearCookie("id");
         res.clearCookie("username");
         if (!resetToken) {
-            res.cookie("password-reset-message", "Reset Link Invalid");
+            res.cookie("snackbar-message", "Reset Link Invalid");
             res.send({
                 success: 0
             });
@@ -168,7 +176,7 @@ export class AuthLocalController {
                 { resetTokenHash: resetTokenHash },
                 { resetTokenHash: "" }
             ).then(user => {
-                res.cookie("password-reset-message", "Reset Link Expired");
+                res.cookie("snackbar-message", "Reset Link Expired");
                 res.send({
                     success: 0
                 });
@@ -191,7 +199,7 @@ export class AuthLocalController {
         res.clearCookie("reset-token");
         res.clearCookie("password-reset");
         if (!resetToken) {
-            res.cookie("password-reset-message", "Reset Link Invalid");
+            res.cookie("snackbar-message", "Reset Link Invalid");
             res.send({
                 success: 0
             });
@@ -206,7 +214,7 @@ export class AuthLocalController {
                 { resetTokenHash: resetTokenHash },
                 { resetTokenHash: "" }
             ).then(user => {
-                res.cookie("password-reset-message", "Reset Link Expired");
+                res.cookie("snackbar-message", "Reset Link Expired");
                 res.send({
                     success: 0
                 });
@@ -216,13 +224,13 @@ export class AuthLocalController {
         let newPassword = req.body["password"];
         let pin = req.body["pin"];
         if (pin != pintok) {
-            res.cookie("password-reset-message", "Invalid OTP. Request PIN again.");
+            res.cookie("snackbar-message", "Invalid OTP. Request PIN again.");
             Users.findOneAndUpdate(
                 { resetTokenHash: resetTokenHash },
                 { resetTokenHash: "" }
             ).then(user => {
                 if (!user) {
-                    res.cookie("password-reset-message", "Reset Link Expired");
+                    res.cookie("snackbar-message", "Reset Link Expired");
                 }
                 res.send({
                     success: 0
@@ -245,18 +253,18 @@ export class AuthLocalController {
             }
         ).then(user => {
             if (user) {
-                res.cookie("password-reset-message", "Password Reset Successful");
+                res.cookie("snackbar-message", "Password Reset Successful");
                 res.send({
                     success: 1
                 });
             } else {
-                res.cookie("password-reset-message", "Reset Link Expired");
+                res.cookie("snackbar-message", "Reset Link Expired");
                 res.send({
                     success: 0
                 });
             }
         }).catch(err => {
-            res.cookie("password-reset-message", "Reset Link Expired");
+            res.cookie("snackbar-message", "Reset Link Expired");
             res.send({
                 success: 0
             });

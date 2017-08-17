@@ -15,10 +15,13 @@ class AuthSocialController {
         console.log(req.headers["id"]);
         passport.authorize(social, function (err, user, info) {
             if (err) {
+                res.cookie("snackbar-message", social + " login failed :(");
                 res.redirect("/");
                 return;
             }
             if (info === 3) {
+                res.cookie("token", req.cookies["token"], { httpOnly: true });
+                res.cookie("snackbar-message", social + " linked with a different account");
                 return res.redirect('/');
             }
 
@@ -27,6 +30,7 @@ class AuthSocialController {
                 res.cookie("username", user.username);
             }
             res.cookie("token", TokenService.getToken(user.id), { httpOnly: true });
+            res.cookie("snackbar-message", social + " login successful!");
             res.redirect("/");
 
         })(req, res, next);

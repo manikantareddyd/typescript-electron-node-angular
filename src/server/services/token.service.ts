@@ -63,7 +63,7 @@ class TokenService {
             );
             return token;
         }
-        return dtoken;
+        return cookies["token"];
     }
 
 
