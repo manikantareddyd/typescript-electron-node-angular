@@ -1,14 +1,14 @@
 export interface Facebook {
-    token_url: string;
-    auth_url: string;
-    app_id: string;
-    app_secret: string;
+    tokenUrl: string;
+    authUrl: string;
+    appId: string;
+    appSecret: string;
     callback: string;
 }
 
 export interface Twitter {
-    consumer_key: string;
-    consumer_secret: string;
+    consumerKey: string;
+    consumerSecret: string;
     callback: string;
 }
 

@@ -8,10 +8,10 @@ import * as fs from 'fs';
 import { Request, Response } from 'express';
 
 export default new FacebookStrategy({
-    authorizationURL: AppSecrets.auth.facebook.auth_url,
-    tokenUrl: AppSecrets.auth.facebook.token_url,
-    clientID: AppSecrets.auth.facebook.app_id,
-    clientSecret: AppSecrets.auth.facebook.app_secret,
+    authorizationURL: AppSecrets.auth.facebook.authUrl,
+    tokenUrl: AppSecrets.auth.facebook.tokenUrl,
+    clientID: AppSecrets.auth.facebook.appId,
+    clientSecret: AppSecrets.auth.facebook.appSecret,
     callbackURL: AppSecrets.auth.facebook.callback,
     passReqToCallback: true,
     profileFields: ['id', 'displayName', 'photos', 'email', 'name']

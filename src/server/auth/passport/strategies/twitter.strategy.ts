@@ -7,8 +7,8 @@ import { CryptService } from '../../../services/_';
 import { Request, Response } from 'express';
 
 export default new TwitterStrategy({
-    consumerKey: AppSecrets.auth.twitter.consumer_key,
-    consumerSecret: AppSecrets.auth.twitter.consumer_secret,
+    consumerKey: AppSecrets.auth.twitter.consumerKey,
+    consumerSecret: AppSecrets.auth.twitter.consumerSecret,
     callbackURL: AppSecrets.auth.twitter.callback,
     passReqToCallback: true,
     profileFields: ['id', 'displayName', 'photos', 'emails', 'name']
