@@ -30,7 +30,7 @@ gulp.task("build_server", () => {
         .pipe(sourcemaps.init())
         .pipe(serverTsProject())
         .js
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest("dist/server"));
 });
 gulp.task("build_client", () => {
@@ -38,7 +38,7 @@ gulp.task("build_client", () => {
         .pipe(sourcemaps.init())
         .pipe(clientTsProject())
         .js
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest("dist/client"));
 });
 
@@ -78,4 +78,18 @@ gulp.task("client", client_tasks);
 gulp.task("assets", asset_tasks);
 
 // Do all
-gulp.task("default", tasks);
+gulp.task("all", tasks);
+gulp.task("default", tasks, function(){
+    gulp.watch('src/server/**/*.*', function() {
+        // run styles upon changes
+        gulp.run('server');
+     });
+     gulp.watch('src/client/**/*.*', function() {
+        // run styles upon changes
+        gulp.run('client');
+     });
+     gulp.watch('src/assets/**/*.*', function() {
+        // run styles upon changes
+        gulp.run('assets');
+     });
+});
