@@ -16,17 +16,11 @@
             "type": "node",
             "request": "attach",
             "name": "Attach by Process ID",
-            "processId": "${command:PickProcess}"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch via NPM",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "debug"
-            ],
-            "sourceMaps": true            
+            "processId": "${command:PickProcess}",
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceRoot}/dist/server/**/*.js"
+            ]
         }
     ]
 }
