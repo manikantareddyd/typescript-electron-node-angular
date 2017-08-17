@@ -4,7 +4,7 @@ function do_server {
     Remove-Item -r dist/server
     Remove-Item -r dist/assets
     Copy-Item -r ./src/assets ./dist/assets
-    gulp
+    gulp server
 }
 
 function do_client_aot {
@@ -32,7 +32,6 @@ function do_client_aot {
 function do_client {
     Remove-Item -r dist/client
     Copy-Item -r ./src/client ./dist/client
-    Copy-Item ./dist/client/systemjs/* ./dist/client
     Copy-Item ./dist/client/index.html ./dist/server/index.html
     node_modules/.bin/ngc -p dist/client/tsconfig.json
 }
