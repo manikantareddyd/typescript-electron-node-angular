@@ -5,12 +5,12 @@ let ts = require("gulp-typescript");
 
 // Files Other than Typescript files that we need
 let SERVER_FILES = [
-    "src/server/*.json", "src/server/**/*.json", 
+    "src/server/*.json", "src/server/**/*.json",
     "src/server/*.js", "src/server/**/*.js"
 ];
 let CLIENT_FILES = [
-    "src/client/**/*.js", "src/client/*.js", 
-    "src/client/**/*.html", "src/client/*.html", 
+    "src/client/**/*.js", "src/client/*.js",
+    "src/client/**/*.html", "src/client/*.html",
     "src/client/**/*.json", "src/client/*.json",
     "src/client/**/*.css", "src/client/*.css"
 ];
@@ -22,13 +22,15 @@ let ASSET_FILES = [
 // Typescript Configs!
 let serverTsProject = ts.createProject("./src/server/tsconfig.json");
 let clientTsProject = ts.createProject("./src/client/tsconfig.json");
-
+let sourcemaps = require('gulp-sourcemaps');
 
 // Compile Typescript files into output directories
 gulp.task("build_server", () => {
     return serverTsProject.src()
+        .pipe(sourcemaps.init())
         .pipe(serverTsProject())
         .js
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("dist/server"));
 });
 gulp.task("build_client", () => {
@@ -65,7 +67,7 @@ var client_tasks = [
 ];
 var asset_tasks = [
     "move_assets_data"
-]
+];
 var tasks = server_tasks.concat(client_tasks).concat(asset_tasks);
 
 // Simple Interfaces to compile server and client
