@@ -35,8 +35,10 @@ gulp.task("build_server", () => {
 });
 gulp.task("build_client", () => {
     return clientTsProject.src()
-        .pipe(serverTsProject())
+        .pipe(sourcemaps.init())
+        .pipe(clientTsProject())
         .js
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("dist/client"));
 });
 
