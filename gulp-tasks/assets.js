@@ -1,12 +1,13 @@
 const gulp = require("gulp");
 
-const ASSET_FILES = [
+const ASSETS_FILES = [
     "src/assets/**/*.*"
 ];
+const ASSETS_DEST = "dist/assets"
 
 gulp.task("move_assets_data", () => {
-    return gulp.src(ASSET_FILES)
-        .pipe(gulp.dest("dist/assets"));
+    return gulp.src(ASSETS_FILES)
+        .pipe(gulp.dest(ASSETS_DEST));
 });
 
 gulp.task("assets", ["move_assets_data"]);
