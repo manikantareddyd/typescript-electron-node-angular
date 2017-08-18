@@ -16,25 +16,22 @@ export interface Jwt {
     secret: string;
 }
 
-export interface AuthSecrets {
+export interface Auth {
     facebook: Facebook;
     twitter: Twitter;
     jwt: Jwt;
 }
 
-interface EmailSecrets {
-    service: string
-    username: string,
-    password: string
+export interface Email {
+    service: string;
+    username: string;
+    password: string;
 }
 
-interface AppSecrets {
-    auth: AuthSecrets,
-    email: EmailSecrets,
-    cryptSecret: string
+export interface AppSecrets {
+    auth: Auth;
+    email: Email;
+    cryptSecret: string;
 }
-
-
-
 
 export default <AppSecrets>require("./app.secrets.json");

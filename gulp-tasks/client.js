@@ -7,7 +7,9 @@ const CLIENT_FILES = [
     "src/client/*.js", "src/client/**/*.js",
     "src/client/*.css", "src/client/**/*.css",
     "src/client/*.html", "src/client/**/*.html",
-    "!src/client/aot-files/*", "!src/client/aot-files/**/*" 
+    "!src/client/aot-files/*", "!src/client/aot-files/**/*",
+    "!src/client/systemjs/*", "!src/client/systemjs/**/*",
+    "!src/client/tsconfig.json"
 ];
 const CLIENT_SRC_DIR = "src/client";
 const CLIENT_DEST_DIR = "dist/client";

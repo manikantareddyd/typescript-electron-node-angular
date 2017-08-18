@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import * as uuid from 'uuid/v4';
-import AppSecrets from '../app.secrets';
+import AppSecrets from '../constants/app.secrets';
 class CryptService {
     algorithm = 'aes-256-ctr';
     password = AppSecrets.cryptSecret;

@@ -62,7 +62,6 @@
         "mongoose-migration": "^0.2.0",
         "phantomjs-prebuilt": "^2.1.14",
         "protractor": "^5.1.2",
-        "require-dir": "^0.3.2",
         "rollup": "^0.41.6",
         "rollup-plugin-commonjs": "^8.0.2",
         "rollup-plugin-node-resolve": "^2.1.1",

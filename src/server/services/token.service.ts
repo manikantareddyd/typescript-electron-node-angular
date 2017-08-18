@@ -1,4 +1,4 @@
-import AppSecrets from '../app.secrets';
+import AppSecrets from '../constants/app.secrets';
 import * as jwt from 'jsonwebtoken';
 import { CryptService } from './_';
 class TokenService {

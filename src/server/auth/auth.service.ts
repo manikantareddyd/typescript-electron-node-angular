@@ -1,6 +1,6 @@
 
 
-import AppSecrets from '../app.secrets';
+import AppSecrets from '../constants/app.secrets';
 import { Users } from '../db/models/_';
 import { Request, Response } from 'express';
 import { TokenService, CryptService } from '../services/_';

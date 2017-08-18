@@ -9,7 +9,7 @@ import {
     AuthFacebookController
 } from './controllers/_'
 import * as expressJwt from 'express-jwt';
-import AppSecrets from '../app.secrets';
+import AppSecrets from '../constants/app.secrets';
 import AuthService from './auth.service';
 let authenticate = expressJwt({ secret: AppSecrets.auth.jwt.secret })
 

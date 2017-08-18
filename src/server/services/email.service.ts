@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import AppSecrets from '../app.secrets';
+import AppSecrets from '../constants/app.secrets';
 
 class EmailService {
     public transporter = nodemailer.createTransport({

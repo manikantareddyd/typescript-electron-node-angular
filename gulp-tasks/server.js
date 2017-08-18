@@ -4,7 +4,9 @@ const sourcemaps = require("gulp-sourcemaps");
 
 const SERVER_FILES = [
     "src/server/*.json", "src/server/**/*.json",
-    "src/server/*.js", "src/server/**/*.js"
+    "src/server/*.js", "src/server/**/*.js",
+    "!src/server/tsconfig.json",
+    "!src/server/constants/app.secrets_template.json"
 ];
 const SERVER_SRC_DIR = "src/server";
 const SERVER_DEST_DIR = "dist/server";
