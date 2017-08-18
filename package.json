@@ -42,6 +42,8 @@
     "chai-http": "^3.0.0",
     "concurrently": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-load-plugins": "^1.5.0",
     "gulp-ngc": "^0.3.2",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^3.2.0",
@@ -61,15 +63,18 @@
     "mongoose-migration": "^0.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "protractor": "^5.1.2",
+    "require-dir": "^0.3.2",
     "rollup": "^0.41.6",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^2.1.1",
     "rollup-plugin-uglify": "^1.0.2",
+    "rollup-stream": "^1.23.1",
     "sequelize-typescript": "^0.3.5",
     "source-map-explorer": "^1.4.0",
     "traceur": "0.0.111",
     "ts-node": "^1.7.3",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "vinyl-source-stream": "^1.1.0"
   },
   "repository": {
     "type": "git",
