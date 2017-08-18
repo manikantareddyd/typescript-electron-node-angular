@@ -1,4 +1,3 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
 import * as mongoose from 'mongoose';
 import { IHero } from './models.d'
 
