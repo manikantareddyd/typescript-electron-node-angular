@@ -31,7 +31,7 @@ interface EmailSecrets {
 interface AppSecrets {
     auth: AuthSecrets,
     email: EmailSecrets,
-    crypt_secret: string
+    cryptSecret: string
 }
 
 

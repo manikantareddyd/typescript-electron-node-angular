@@ -3,7 +3,7 @@ import * as uuid from 'uuid/v4';
 import AppSecrets from '../app.secrets';
 class CryptService {
     algorithm = 'aes-256-ctr';
-    password = AppSecrets.crypt_secret;
+    password = AppSecrets.cryptSecret;
     encrypt(text) {
         var cipher = crypto.createCipher(this.algorithm, this.password)
         var crypted = cipher.update(text, 'utf8', 'hex')

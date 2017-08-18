@@ -1,25 +1,17 @@
-let gulp = require("gulp");
-let ts = require("gulp-typescript");
-let sourcemaps = require("gulp-sourcemaps");
+const gulp = require("gulp");
+const ts = require("gulp-typescript");
+const sourcemaps = require("gulp-sourcemaps");
 
-
-console.log("poop");
-let SERVER_FILES = [
+const SERVER_FILES = [
     "src/server/*.json", "src/server/**/*.json",
     "src/server/*.js", "src/server/**/*.js"
 ];
-let SERVER_SRC_DIR = "src/server";
-let SERVER_DEST_DIR = "dist/server";
-let SERVER_TS_CONFIG = "./src/server/tsconfig.json";
-let SERVER_SOURCEMAP_ROOT = "../../src/server"; // This is with resepect to SERVER_DEST_DIR
+const SERVER_SRC_DIR = "src/server";
+const SERVER_DEST_DIR = "dist/server";
+const SERVER_TS_CONFIG = "./src/server/tsconfig.json";
+const SERVER_SOURCEMAP_ROOT = "../../src/server"; // This is with resepect to SERVER_DEST_DIR
 
-let SERVER_TASKS = [
-    "build_server",
-    "move_server_data"
-];
-
-let serverTsProject = ts.createProject(SERVER_TS_CONFIG);
-
+const serverTsProject = ts.createProject(SERVER_TS_CONFIG);
 
 gulp.task("move_server_data", () => {
     return gulp.src(SERVER_FILES)
@@ -35,4 +27,5 @@ gulp.task("build_server", ["move_server_data"], () => {
         .pipe(gulp.dest(SERVER_DEST_DIR));
 });
 
-module.exports = SERVER_TASKS;
+gulp.task("server", ["build_server"]);
+module.exports = "server";
