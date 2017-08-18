@@ -1,5 +1,6 @@
 const gulp = require("gulp");
 const servertask = require("./gulp-tasks/server");
+const electrontask = require("./gulp-tasks/electron");
 const clienttask = require("./gulp-tasks/client");
 const assetstask = require("./gulp-tasks/assets");
 const cleantask = require("./gulp-tasks/clean");
@@ -11,6 +12,7 @@ const ASSETS_FILES = "src/assets/**/*.*";
 
 const TASKS = [
     servertask,
+    electrontask,
     clienttask,
     assetstask
 ];

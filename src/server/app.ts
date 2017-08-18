@@ -7,6 +7,8 @@ import * as bodyParser from 'body-parser';
 import * as passport from 'passport';
 import * as mongoose from 'mongoose';
 import * as bluebird from 'bluebird';
+import * as electron from 'electron';
+
 import passportConfig from './auth/passport/passport.config';
 
 import { Heroes } from './db/models/_';
@@ -31,7 +33,8 @@ class App {
         Heroes.count({}).then(h => {
             console.log("halala", h);
         })
-        
+        const port = 3000;
+        this.app.listen(port)
     }
 
     // Configure Express middleware.
