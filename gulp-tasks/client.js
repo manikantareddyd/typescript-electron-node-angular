@@ -12,7 +12,7 @@ const CLIENT_SRC_DIR = "src/client";
 const CLIENT_DEST_DIR = "dist/client";
 const CLIENT_TS_CONFIG = "./src/client/tsconfig.json";
 const CLIENT_SOURCEMAP_ROOT = "../../src/client"; // This is with resepect to CLIENT_DEST_DIR
-
+const CLIENT_SYSTEM_FILES = "./src/client/systemjs/*.js";
 const CLIENT_TASKS = [
     "build_client",
     "move_client_data"
@@ -26,7 +26,12 @@ gulp.task("move_client_data", () => {
         .pipe(gulp.dest(CLIENT_DEST_DIR));
 });
 
-gulp.task("build_client", ["move_client_data"], () => {
+gulp.task("move_client_systemjs", () => {
+    return gulp.src(CLIENT_SYSTEM_FILES)
+        .pipe(gulp.dest(CLIENT_DEST_DIR));
+});
+
+gulp.task("build_client", ["move_client_data", "move_client_systemjs"], () => {
     return clientTsProject.src()
         .pipe(sourcemaps.init())
         .pipe(clientTsProject())
